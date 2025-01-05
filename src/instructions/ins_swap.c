@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ins_swap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rkerman <rkerman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:01:24 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/05 14:57:00 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/05 22:36:45 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 void	sa(t_stack **stack, int trigger)
 {
@@ -42,6 +42,15 @@ void	sb(t_stack **stack, int trigger)
 	}
 }
 
+
+void	ss(t_stack **stacka, t_stack **stackb)
+{
+	sa(stacka, 0);
+	sb(stackb, 0);
+	write(1, "ss\n", 3);
+}
+
+
 t_stack *ft_lstcreate(int data)
 {
 	t_stack	*newlst;
@@ -70,15 +79,6 @@ void	ft_lstadd_back(t_stack **chainz, t_stack *newnode)
 	(*chainz)->next = newnode;
 	*chainz = head;
 }
-
-void	ss(t_stack **stacka, t_stack **stackb)
-{
-	sa(stacka, 0);
-	sb(stackb, 0);
-	write(1, "ss\n", 3);
-}
-
-
 int	main(void)
 {
 	t_stack *pa;
@@ -106,4 +106,9 @@ int	main(void)
 	ft_lstadd_back(&pb, pb2);
 	ft_lstadd_back(&pb, pb3);
 	sa(&pa, 1);
+	while (pa)
+	{
+		printf("%d", pa->value);
+		pa = pa->next;
+	}
 }

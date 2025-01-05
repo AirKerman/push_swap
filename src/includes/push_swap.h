@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ins_rrotate.c                                      :+:      :+:    :+:   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/05 15:29:33 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/05 18:03:15 by rkerman          ###   ########.fr       */
+/*   Created: 2025/01/04 16:02:35 by rkerman           #+#    #+#             */
+/*   Updated: 2025/01/05 22:10:17 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
-void	rra(t_stack **chainza)
+typedef struct t_list 
 {
-	t_stack *tmp;
-	t_stack *head;
+	int	value;
+	struct t_list	*next;
 
-	if (*chainza && (*chainza)->next)
-	{
-		while (*chainza && (*chainza)->next && (*chainza)->next->next)
-			*chainza = (*chainza)->next;
-		head = (*chainza)->next;
-		(*chainza)->next = NULL;
-		
-	}
-}
+}	t_stack;
+
+#include <unistd.h>
+#include <stdlib.h>
+
+void	sa(t_stack **stack, int trigger);
+void	sb(t_stack **stack, int trigger);
+void	ss(t_stack **stacka, t_stack **stackb);
+
+
+#endif
+
