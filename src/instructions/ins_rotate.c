@@ -6,15 +6,15 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 15:11:39 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/05 23:08:26 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/06 20:46:02 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
 void	ra(t_stack **chainz, int trigger)
-{	
-	t_stack *tmp;
+{
+	t_stack	*tmp;
 	t_stack	*head;
 
 	if (*chainz && (*chainz)->next)
@@ -33,7 +33,7 @@ void	ra(t_stack **chainz, int trigger)
 
 void	rb(t_stack **chainz, int trigger)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 	t_stack	*head;
 
 	if (*chainz && (*chainz)->next)
@@ -56,7 +56,7 @@ void	rr(t_stack **chainza, t_stack **chainzb)
 	rb(chainzb, 0);
 	write(1, "rr\n", 3);
 }
-
+/*
 t_stack *ft_lstcreate(int data)
 {
     t_stack *newlst;
@@ -113,5 +113,4 @@ int main(void)
 		printf("%d", ppa->value);
 		ppa = ppa->next;
 	}
-}
-
+}*/

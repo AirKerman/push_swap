@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 15:29:33 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/05 23:12:50 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/06 20:48:47 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	rra(t_stack **chainza, int trigger)
 {
-	t_stack *tmp;
-	t_stack *head;
+	t_stack	*tmp;
+	t_stack	*head;
 
 	if (*chainza && (*chainza)->next)
 	{
@@ -31,23 +31,23 @@ void	rra(t_stack **chainza, int trigger)
 	}
 }
 
-void    rrb(t_stack **chainzb, int trigger)
+void	rrb(t_stack **chainzb, int trigger)
 {
-    t_stack *tmp;
-    t_stack *head;
+	t_stack	*tmp;
+	t_stack	*head;
 
-    if (*chainzb && (*chainzb)->next)
-    {
-        tmp = *chainzb;
-        while (*chainzb && (*chainzb)->next && (*chainzb)->next->next)
-            *chainzb = (*chainzb)->next;
-        head = (*chainzb)->next;
-        head->next = tmp;
-        (*chainzb)->next = NULL;
-        *chainzb = head;
+	if (*chainzb && (*chainzb)->next)
+	{
+		tmp = *chainzb;
+		while (*chainzb && (*chainzb)->next && (*chainzb)->next->next)
+			*chainzb = (*chainzb)->next;
+		head = (*chainzb)->next;
+		head->next = tmp;
+		(*chainzb)->next = NULL;
+		*chainzb = head;
 		if (trigger)
 			write(1, "rrb\n", 4);
-    }
+	}
 }
 
 void	rrr(t_stack **chainza, t_stack **chainzb)
@@ -56,7 +56,7 @@ void	rrr(t_stack **chainza, t_stack **chainzb)
 	rrb(chainzb, 0);
 	write(1, "rrr\n", 4);
 }
-
+/*
 t_stack *ft_lstcreate(int data)
 {
     t_stack *newlst;
@@ -113,5 +113,4 @@ int main(void)
         printf("%d", ppa->value);
         ppa = ppa->next;
     }
-}
-
+}*/

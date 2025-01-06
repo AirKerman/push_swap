@@ -6,7 +6,7 @@
 /*   By: rkerman <rkerman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:01:24 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/05 22:36:45 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/06 20:50:01 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	sa(t_stack **stack, int trigger)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	if (*stack && (*stack)->next)
 	{
@@ -29,7 +29,7 @@ void	sa(t_stack **stack, int trigger)
 
 void	sb(t_stack **stack, int trigger)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	if (*stack && (*stack)->next)
 	{
@@ -42,15 +42,13 @@ void	sb(t_stack **stack, int trigger)
 	}
 }
 
-
 void	ss(t_stack **stacka, t_stack **stackb)
 {
 	sa(stacka, 0);
 	sb(stackb, 0);
 	write(1, "ss\n", 3);
 }
-
-
+/*
 t_stack *ft_lstcreate(int data)
 {
 	t_stack	*newlst;
@@ -111,4 +109,4 @@ int	main(void)
 		printf("%d", pa->value);
 		pa = pa->next;
 	}
-}
+}*/

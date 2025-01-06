@@ -6,7 +6,7 @@
 /*   By: rkerman <rkerman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 14:57:57 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/05 22:24:35 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/06 20:45:12 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	pa(t_stack **stackb, t_stack **stacka)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	if (*stackb && stackb)
 	{
@@ -28,7 +28,7 @@ void	pa(t_stack **stackb, t_stack **stacka)
 
 void	pb(t_stack **stacka, t_stack **stackb)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	if (*stacka && stackb)
 	{
@@ -39,7 +39,7 @@ void	pb(t_stack **stacka, t_stack **stackb)
 		write(1, "pb\n", 3);
 	}
 }
-
+/*
 t_stack *ft_lstcreate(int data)
 {
 	t_stack	*newlst;
@@ -90,4 +90,4 @@ int	main(void)
 	ft_lstadd_back(&ppa, pa2);
 	ft_lstadd_back(&ppa, pa3);
 	pb(&ppa, &ppb);
-}
+}*/
