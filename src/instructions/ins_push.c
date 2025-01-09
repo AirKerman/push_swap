@@ -6,37 +6,39 @@
 /*   By: rkerman <rkerman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 14:57:57 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/06 20:45:12 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/09 17:28:55 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	pa(t_stack **stackb, t_stack **stacka)
+void	pa(t_stack **stack_b, t_stack **stack_a, int trigger)
 {
 	t_stack	*tmp;
 
-	if (*stackb && stackb)
+	if (*stack_b && stack_b)
 	{
-		tmp = *stackb;
-		*stackb = (*stackb)->next;
-		tmp->next = *stacka;
-		*stacka = tmp;
-		write(1, "pa\n", 3);
+		tmp = *stack_b;
+		*stack_b = (*stack_b)->next;
+		tmp->next = *stack_a;
+		*stack_a = tmp;
+		if (trigger)
+			write(1, "pa\n", 3);
 	}
 }
 
-void	pb(t_stack **stacka, t_stack **stackb)
+void	pb(t_stack **stack_a, t_stack **stack_b, int trigger)
 {
 	t_stack	*tmp;
 
-	if (*stacka && stackb)
+	if (*stack_a && stack_b)
 	{
-		tmp = *stacka;
-		*stacka = (*stacka)->next;
-		tmp->next = *stackb;
-		*stackb = tmp;
-		write(1, "pb\n", 3);
+		tmp = *stack_a;
+		*stack_a = (*stack_a)->next;
+		tmp->next = *stack_b;
+		*stack_b = tmp;
+		if (trigger)
+			write(1, "pb\n", 3);
 	}
 }
 /*
@@ -51,7 +53,6 @@ t_stack *ft_lstcreate(int data)
 	newlst->next = NULL;
 	return (newlst);
 }
-
 
 void	ft_lstadd_back(t_stack **chainz, t_stack *newnode)
 {

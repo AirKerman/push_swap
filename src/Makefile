@@ -1,11 +1,14 @@
+SRCS
+CC		= cc
+CFLAGS	= -Wall -Werror -Wextra -o
+NAME	= push_swap
+RM		= rm -f
+
+all:		$(NAME)
 
 
-
-
-
-
-fclean:
-		rm *.o push_swap
+$(NAME):	$(CC) $(CFLAGS)
+			$(CC) $(CFLAGS) 
 
 clean:
-		rm *.o
+			 push_swap

@@ -6,55 +6,56 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 15:29:33 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/06 20:48:47 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/09 17:36:32 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	rra(t_stack **chainza, int trigger)
+void	rra(t_stack **stack, int trigger)
 {
 	t_stack	*tmp;
 	t_stack	*head;
 
-	if (*chainza && (*chainza)->next)
+	if (*stack && (*stack)->next)
 	{
-		tmp = *chainza;
-		while (*chainza && (*chainza)->next && (*chainza)->next->next)
-			*chainza = (*chainza)->next;
-		head = (*chainza)->next;
+		tmp = *stack;
+		while (*stack && (*stack)->next && (*stack)->next->next)
+			*stack = (*stack)->next;
+		head = (*stack)->next;
 		head->next = tmp;
-		(*chainza)->next = NULL;
-		*chainza = head;
+		(*stack)->next = NULL;
+		*stack = head;
 		if (trigger)
 			write(1, "rra\n", 4);
 	}
 }
 
-void	rrb(t_stack **chainzb, int trigger)
+void	rrb(t_stack **stack, int trigger)
 {
 	t_stack	*tmp;
 	t_stack	*head;
 
-	if (*chainzb && (*chainzb)->next)
+	if (*stack && (*stack)->next)
 	{
-		tmp = *chainzb;
-		while (*chainzb && (*chainzb)->next && (*chainzb)->next->next)
-			*chainzb = (*chainzb)->next;
-		head = (*chainzb)->next;
+		tmp = *stack;
+		while (*stack && (*stack)->next && (*stack)->next->next)
+			*stack = (*stack)->next;
+		head = (*stack)->next;
 		head->next = tmp;
-		(*chainzb)->next = NULL;
-		*chainzb = head;
+		(*stack)->next = NULL;
+		*stack = head;
 		if (trigger)
 			write(1, "rrb\n", 4);
 	}
 }
 
-void	rrr(t_stack **chainza, t_stack **chainzb)
+void	rrr(t_stack **stack_a, t_stack **stack_b, int trigger)
 {
-	rra(chainza, 0);
-	rrb(chainzb, 0);
-	write(1, "rrr\n", 4);
+	rra(stack_a, 0);
+	rrb(stack_b, 0);
+	if (trigger)
+		write(1, "rrr\n", 4);
 }
 /*
 t_stack *ft_lstcreate(int data)

@@ -6,55 +6,56 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 15:11:39 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/06 20:46:02 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/09 17:30:52 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	ra(t_stack **chainz, int trigger)
+void	ra(t_stack **stack, int trigger)
 {
 	t_stack	*tmp;
 	t_stack	*head;
 
-	if (*chainz && (*chainz)->next)
+	if (*stack && (*stack)->next)
 	{
-		tmp = *chainz;
-		head = (*chainz)->next;
-		while (*chainz && (*chainz)->next)
-			*chainz = (*chainz)->next;
+		tmp = *stack;
+		head = (*stack)->next;
+		while (*stack && (*stack)->next)
+			*stack = (*stack)->next;
 		tmp->next = NULL;
-		(*chainz)->next = tmp;
-		*chainz = head;
+		(*stack)->next = tmp;
+		*stack = head;
 		if (trigger)
 			write(1, "ra\n", 3);
 	}
 }
 
-void	rb(t_stack **chainz, int trigger)
+void	rb(t_stack **stack, int trigger)
 {
 	t_stack	*tmp;
 	t_stack	*head;
 
-	if (*chainz && (*chainz)->next)
+	if (*stack && (*stack)->next)
 	{
-		tmp = *chainz;
-		head = (*chainz)->next;
-		while (*chainz && (*chainz)->next)
-			*chainz = (*chainz)->next;
+		tmp = *stack;
+		head = (*stack)->next;
+		while (*stack && (*stack)->next)
+			*stack = (*stack)->next;
 		tmp->next = NULL;
-		(*chainz)->next = tmp;
-		*chainz = head;
+		(*stack)->next = tmp;
+		*stack = head;
 		if (trigger)
 			write(1, "rb\n", 3);
 	}
 }
 
-void	rr(t_stack **chainza, t_stack **chainzb)
+void	rr(t_stack **stack_a, t_stack **stack_b, int trigger)
 {
-	ra(chainza, 0);
-	rb(chainzb, 0);
-	write(1, "rr\n", 3);
+	ra(stack_a, 0);
+	rb(stack_b, 0);
+	if (trigger)
+		write(1, "rr\n", 3);
 }
 /*
 t_stack *ft_lstcreate(int data)

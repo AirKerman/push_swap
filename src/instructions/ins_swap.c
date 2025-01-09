@@ -6,7 +6,7 @@
 /*   By: rkerman <rkerman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:01:24 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/06 20:50:01 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/09 17:26:06 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,12 @@ void	sb(t_stack **stack, int trigger)
 	}
 }
 
-void	ss(t_stack **stacka, t_stack **stackb)
+void	ss(t_stack **stack_a, t_stack **stack_b, int trigger)
 {
-	sa(stacka, 0);
-	sb(stackb, 0);
-	write(1, "ss\n", 3);
+	sa(stack_a, 0);
+	sb(stack_b, 0);
+	if (trigger)
+		write(1, "ss\n", 3);
 }
 /*
 t_stack *ft_lstcreate(int data)
