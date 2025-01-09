@@ -6,8 +6,14 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 17:56:24 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/09 17:56:44 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/09 18:05:16 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
 
+int	parser(char	**v, t_stack **a, t_stack **b)
+{
+	
+
+}
