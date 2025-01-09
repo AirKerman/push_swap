@@ -6,11 +6,11 @@
 /*   By: rkerman <rkerman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:01:24 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/09 17:26:06 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/09 17:54:27 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "push_swap.h"
 
 void	sa(t_stack **stack, int trigger)
 {
