@@ -6,12 +6,11 @@
 /*   By: rkerman <rkerman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 23:37:37 by rkerman           #+#    #+#             */
-/*   Updated: 2024/11/08 22:28:04 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/11 17:47:41 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
+#include "push_swap.h"
 
 static void	ft_cal_bzero(void *s, size_t n)
 {

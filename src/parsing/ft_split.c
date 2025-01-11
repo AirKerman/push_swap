@@ -6,11 +6,11 @@
 /*   By: rkerman <rkerman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 13:00:20 by rkerman           #+#    #+#             */
-/*   Updated: 2024/11/10 14:51:10 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/11 17:47:22 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
 static size_t	countword(char const *s, char sep)
 {
