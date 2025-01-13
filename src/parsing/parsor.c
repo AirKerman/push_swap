@@ -6,13 +6,13 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 17:56:24 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/13 20:21:19 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/13 20:52:03 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	free_arr(char **arr)
+void	free_arr(char **arr)
 {
 	int	i;
 
@@ -23,7 +23,6 @@ int	free_arr(char **arr)
 		i++;
 	}
 	free(arr);
-	return (0);
 }
 
 void	arr_cat(char ***arr, char **cpy, int (*del)(char **array), int	*len)
@@ -34,6 +33,8 @@ void	arr_cat(char ***arr, char **cpy, int (*del)(char **array), int	*len)
 	while (cpy[i])
 	{
 		(*arr)[*len] = ft_strdup(cpy[i]);
+		if (!(*arr)[*len])
+			return (del(*arr));
 		(*len)++;
 		i++;
 	}
@@ -63,7 +64,12 @@ char	**arr_concat(char **a, char *s)
 	return (new);
 }
 
-char	**parser(char **v)
+void	stack_maker(char **v, t_stack **s)
+{
+
+}
+
+int	parser(char **v, t_stack **stack_a)
 {
 	int		i;
 	char	**arr;
@@ -74,27 +80,29 @@ char	**parser(char **v)
 	{
 		arr = arr_concat(arr, *v);
 		if (!arr)
-			return (arr);
+			return (0);
 		v++;
 	}
-	return (arr);
+	if(!stack_maker(arr, stack_a))
+		return (0);
+	return (1);
 }
-/*
+
 #include "stdio.h"
 
 int	main(int argc, char **argv)
 {
-	char	**turing1;
+	t_stack	*stacka;
 	int		i;
 	
 	argc = 0;
 	i = 0;
 	argv++;
-	turing1 = parser(argv);
-	while (turing1[i])
+	i = parser(argv, &stacka);
+	/*while (turing1[i])
 	{
 		printf("%s\n", turing1[i]);
 		i++;
 	}
-	free_arr(turing1);
-}*/
+	free_arr(turing1);*/
+}
