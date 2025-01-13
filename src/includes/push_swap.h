@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:02:35 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/09 17:37:15 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/13 20:17:57 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,19 @@ typedef struct t_list
 
 #include <unistd.h>
 #include <stdlib.h>
+
+/*
+
+	Utils
+
+*/
+
+int		ft_arrlen(char **a);
+int		ft_strlen(const char *s);
+char    *ft_strdup(const char *s);
+void	*ft_calloc(size_t nmemb, size_t size);
+char	**ft_split(char const *s, char c);
+
 
 /*
 

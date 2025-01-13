@@ -6,50 +6,13 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 17:56:24 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/11 18:36:24 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/13 20:21:19 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		ft_arrlen(char **a)
-{
-	int	i;
-
-	i = 0;
-	while (a[i])
-		i++;
-	return (i);
-}
-
-int		ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-char	*ft_strdup(const char *s)
-{
-	char	*str;
-	int	i;
-
-	i = 0;
-	str = ft_calloc(ft_strlen(s) + 1, sizeof(char));
-	if (!str)
-		return (NULL);
-	while (s[i])
-	{
-		str[i] = s[i];
-		i++;
-	}
-	return (str);
-}
-
-int		free_arr(char **arr)
+int	free_arr(char **arr)
 {
 	int	i;
 
@@ -63,10 +26,24 @@ int		free_arr(char **arr)
 	return (0);
 }
 
-char 	**arr_concat(char **a, char *s)
+void	arr_cat(char ***arr, char **cpy, int (*del)(char **array), int	*len)
+{
+	int	i;
+
+	i = 0;
+	while (cpy[i])
+	{
+		(*arr)[*len] = ft_strdup(cpy[i]);
+		(*len)++;
+		i++;
+	}
+	if (cpy)
+		del(cpy);
+}
+
+char	**arr_concat(char **a, char *s)
 {
 	int		len;
-	int		i;
 	char	**needle;
 	char	**new;
 
@@ -79,27 +56,10 @@ char 	**arr_concat(char **a, char *s)
 	new = ft_calloc(len + 1, sizeof(char *));
 	if (!new)
 		return (free_arr(a), free_arr(needle), NULL);
-	i = 0;
 	len = 0;
-	while (a[i])
-	{
-		new[len] = ft_strdup(a[i]);
-		if (!new[len])
-			return (free_arr(new), free_arr(a), free_arr(needle), NULL);
-		i++;
-		len++;
-	}
-	i = 0;
-	while (needle[i])
-	{
-		new[len] = ft_strdup(needle[i]);
-		if(!new[len])	
-			return (free_arr(new), free_arr(a), free_arr(needle), NULL);
-		i++;
-		len++;
-	}
+	arr_cat(&new, a, free_arr, &len);
+	arr_cat(&new, needle, free_arr, &len);
 	new[len] = NULL;
-
 	return (new);
 }
 
@@ -119,7 +79,7 @@ char	**parser(char **v)
 	}
 	return (arr);
 }
-
+/*
 #include "stdio.h"
 
 int	main(int argc, char **argv)
@@ -136,4 +96,5 @@ int	main(int argc, char **argv)
 		printf("%s\n", turing1[i]);
 		i++;
 	}
-}
+	free_arr(turing1);
+}*/
