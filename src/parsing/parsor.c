@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 17:56:24 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/13 20:52:03 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/14 16:23:05 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_arr(char **arr)
 	free(arr);
 }
 
-void	arr_cat(char ***arr, char **cpy, int (*del)(char **array), int	*len)
+void	arr_cat(char ***arr, char **cpy, void (*del)(char **array), int	*len)
 {
 	int	i;
 
@@ -34,7 +34,13 @@ void	arr_cat(char ***arr, char **cpy, int (*del)(char **array), int	*len)
 	{
 		(*arr)[*len] = ft_strdup(cpy[i]);
 		if (!(*arr)[*len])
-			return (del(*arr));
+		{
+			if (*arr)
+				del(*arr);
+			del(cpy);
+			*arr = NULL;
+			return ;
+		}
 		(*len)++;
 		i++;
 	}
@@ -59,17 +65,21 @@ char	**arr_concat(char **a, char *s)
 		return (free_arr(a), free_arr(needle), NULL);
 	len = 0;
 	arr_cat(&new, a, free_arr, &len);
+	if (!new)
+		return (free_arr(needle), NULL);
 	arr_cat(&new, needle, free_arr, &len);
+	if(!new)
+		return (NULL);	
 	new[len] = NULL;
 	return (new);
 }
-
+/*
 void	stack_maker(char **v, t_stack **s)
 {
 
 }
-
-int	parser(char **v, t_stack **stack_a)
+*/
+char	**parser(char **v)
 {
 	int		i;
 	char	**arr;
@@ -83,26 +93,27 @@ int	parser(char **v, t_stack **stack_a)
 			return (0);
 		v++;
 	}
-	if(!stack_maker(arr, stack_a))
-		return (0);
-	return (1);
+	//if(!stack_maker(arr, stack_a))
+	//	return (0);
+	return (arr);
 }
 
 #include "stdio.h"
 
 int	main(int argc, char **argv)
 {
-	t_stack	*stacka;
+	//t_stack	*stacka;
 	int		i;
+	char	**turing1;	
 	
 	argc = 0;
 	i = 0;
 	argv++;
-	i = parser(argv, &stacka);
-	/*while (turing1[i])
+	turing1 = parser(argv);
+	while (turing1[i])
 	{
 		printf("%s\n", turing1[i]);
 		i++;
 	}
-	free_arr(turing1);*/
+	free_arr(turing1);
 }
