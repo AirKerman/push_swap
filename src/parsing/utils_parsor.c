@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 20:14:56 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/16 02:46:19 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/16 19:28:40 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,7 @@ char	*ft_strdup(const char *s)
 	return (str);
 }
 
-int	ft_atoi()
+int	format_v(char *v)
+{
+	while (*v)	
+}

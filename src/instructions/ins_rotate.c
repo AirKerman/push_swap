@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 15:11:39 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/09 17:54:03 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/15 23:55:16 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int main(void)
     ft_lstadd_back(&ppa, pa1);
     ft_lstadd_back(&ppa, pa2);
     ft_lstadd_back(&ppa, pa3);
-   	rr(&ppa, &ppa);
+   	rr(&ppa, &ppa, 1);
 	while (ppa)
 	{
 		printf("%d", ppa->value);
