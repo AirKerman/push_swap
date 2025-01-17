@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 17:56:24 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/16 02:46:22 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/17 01:38:53 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,11 @@ char	**arr_fusion(char **a, char *s)
 
 int	stack_maker(char **v, t_stack **s)
 {
-	
+	if (!v || !*v)
+		return (0);
+	while (format_v(*v))
+		return (1);
+	return (0);	
 }
 
 int	parser(char **value, t_stack **stack)
@@ -110,18 +114,19 @@ int	parser(char **value, t_stack **stack)
 
 int	main(int argc, char **argv)
 {
-	//t_stack	*stacka;
+	t_stack	*stacka;
 	int		i;
-	char	**turing1;	
+	//char	**turing1;	
 	
 	argc = 0;
 	i = 0;
 	argv++;
-	turing1 = parser(argv);
+	printf("%d", parser(argv, &stacka));
+	/*turing1 = parser(argv);
 	while (turing1[i])
 	{
 		printf("%s\n", turing1[i]);
 		i++;
-	}
-	free_arr(turing1);
+	}*/
+	//free_arr(turing1);
 }

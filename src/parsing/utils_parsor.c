@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 20:14:56 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/16 19:28:40 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/17 01:37:16 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,34 @@ char	*ft_strdup(const char *s)
 
 int	format_v(char *v)
 {
-	while (*v)	
+	int	neg;
+	int	sum;
+
+	sum = 0;
+	neg = 1;
+	if (!v || !*v)
+		return (0);
+	while (*v == ' ' || (*v >= '\t' && *v <= '\r'))
+		*v++;
+	if (*v == '-' || *v == '+')
+	{
+		if (*v == '-')
+			neg = -1;
+		*v++;
+	}
+	if (*v && *v >= '0' && *v <= '9')
+	{
+		while (*v && *v >= '0' && *v <= '9')
+		{
+			if ((sum == 214748214 && *v > '7' && neg == 1)
+				|| (sum == 214748214 && *v > '8' && neg == -1)
+				|| sum > 214748314)
+				return (0);
+			sum = (sum * 10) + (*v - 48);
+			*v++;
+		}
+		if (!*v)
+			return (1);
+	}
+	return (0);
 }
