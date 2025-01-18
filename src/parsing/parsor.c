@@ -6,24 +6,11 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 17:56:24 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/18 17:29:20 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/18 19:18:51 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	free_arr(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}
 
 int	arr_cat(char ***arr, char **cpy, void (*del)(char **array), int	*len)
 {
@@ -90,7 +77,7 @@ int	stack_maker(char **v, t_stack **s)
 	t_stack	*elem;
 
 	i = 0;
-	if (!v || !v[i])
+	if (!v)
 		return (0);
 	while (v[i] && format_v(v[i]))
 	{
@@ -122,28 +109,33 @@ int	parser(char **value, t_stack **stack)
 			return (0);
 		value++;
 	}
-	if (!stack_maker(arr, stack))
-		return (0);
-	return (1);
+	return (stack_maker(arr, stack));
 }
-/*
+
+#include <stdio.h>
+
 int	main(int argc, char **argv)
 {
 	t_stack	*stacka;
 	int		i;
+	t_stack	*tmp;
 	//char	**turing1;	
 	
 	argc = 0;
 	i = 0;
 	argv++;
 	stacka = NULL;
-	printf("%d", parser(argv, &stacka));
+	printf("success: %d\n", parser(argv, &stacka));
 	
+	tmp = stacka;
 	while (stacka)
 	{
 		printf("%d\n", stacka->value);
 		stacka = stacka->next;
 	}
+	stacka = tmp;
+	ft_freelst(&stacka);
+	free(stacka);
 	//free_arr(turing1);
 }
-*/
+

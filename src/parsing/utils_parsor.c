@@ -6,11 +6,24 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 20:14:56 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/18 17:30:20 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/18 19:16:51 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void    free_arr(char **arr)
+{
+    int i;
+
+    i = 0;
+    while (arr[i])
+    {
+        free(arr[i]);
+        i++;
+    }
+    free(arr);
+}
 
 int	ft_arrlen(char **a)
 {
