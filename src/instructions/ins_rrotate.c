@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 15:29:33 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/09 17:54:14 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/20 16:18:43 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	rrr(t_stack **stack_a, t_stack **stack_b, int trigger)
 	if (trigger)
 		write(1, "rrr\n", 4);
 }
-/*
+
 t_stack *ft_lstcreate(int data)
 {
     t_stack *newlst;
@@ -108,10 +108,10 @@ int main(void)
     ft_lstadd_back(&ppa, pa1);
     ft_lstadd_back(&ppa, pa2);
     ft_lstadd_back(&ppa, pa3);
-    rrr(&ppa, &ppa);
+    rra(&ppa, 1);
     while (ppa)
     {
         printf("%d", ppa->value);
         ppa = ppa->next;
     }
-}*/
+}
