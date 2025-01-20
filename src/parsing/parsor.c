@@ -6,13 +6,14 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 17:56:24 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/18 19:18:51 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/20 09:51:27 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	arr_cat(char ***arr, char **cpy, void (*del)(char **array), int	*len)
+static int	arr_cat(char ***arr, char **cpy,
+				void (*del)(char **array), int	*len)
 {
 	int	i;
 
@@ -36,7 +37,7 @@ int	arr_cat(char ***arr, char **cpy, void (*del)(char **array), int	*len)
 	return (1);
 }
 
-char	**array_concatenator(char **a, char **n, int len)
+static char	**array_concatenator(char **a, char **n, int len)
 {
 	int		i;
 	char	**new;
@@ -56,7 +57,7 @@ char	**array_concatenator(char **a, char **n, int len)
 	return (new);
 }
 
-char	**arr_fusion(char **a, char *s)
+static char	**arr_fusion(char **a, char *s)
 {
 	int		len;
 	char	**needle;
@@ -70,15 +71,19 @@ char	**arr_fusion(char **a, char *s)
 	return (array_concatenator(a, needle, len));
 }
 
-int	stack_maker(char **v, t_stack **s)
+static int	stack_maker(char **v, t_stack **s)
 {
 	int		i;
 	int		data;
 	t_stack	*elem;
 
 	i = 0;
-	if (!v)
+	if (!v || !v[i])
+	{
+		if (v)
+			free(v);
 		return (0);
+	}
 	while (v[i] && format_v(v[i]))
 	{
 		data = ft_atoi(v[i]);
@@ -112,6 +117,7 @@ int	parser(char **value, t_stack **stack)
 	return (stack_maker(arr, stack));
 }
 
+/*
 #include <stdio.h>
 
 int	main(int argc, char **argv)
@@ -138,4 +144,4 @@ int	main(int argc, char **argv)
 	free(stacka);
 	//free_arr(turing1);
 }
-
+*/
