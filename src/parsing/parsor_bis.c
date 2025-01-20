@@ -6,23 +6,26 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 09:52:36 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/20 10:08:07 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/20 10:22:16 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	is_formatint(char *s, int *i)
+static int	is_formatint(char *v, int *i, int neg)
 {
+	int	sum;
+
+	sum = 0;
 	if (v[*i] && v[*i] >= '0' && v[*i] <= '9')
 	{
-		while (v[*i] && v[*i] >= '0' && v[i] <= '9')
+		while (v[*i] && v[*i] >= '0' && v[*i] <= '9')
 		{
 			if ((sum == 214748364 && v[*i] > '7' && neg == 1)
 				|| (sum == 214748364 && v[*i] > '8' && neg == -1)
 				|| sum > 214748364)
 				return (0);
-			sum = (sum * 10) + (v[i] - 48);
+			sum = (sum * 10) + (v[*i] - 48);
 			(*i)++;
 		}
 		if (!v[*i])
@@ -34,11 +37,9 @@ static int	is_formatint(char *s, int *i)
 int	format_v(char *v)
 {
 	int	neg;
-	int	sum;
 	int	i;
 
 	i = 0;
-	sum = 0;
 	neg = 1;
 	if (!v || !v[i])
 		return (0);
@@ -50,5 +51,5 @@ int	format_v(char *v)
 			neg = -1;
 		i++;
 	}
-	return (is_formatint(v, &i));
+	return (is_formatint(v, &i, neg));
 }

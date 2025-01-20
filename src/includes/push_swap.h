@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:02:35 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/20 10:02:09 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/20 10:28:25 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		ft_lstchr(t_stack *lst, int data);
 void	ft_freelst(t_stack **lst);
 void	free_arr(char **arr);
 int		format_v(char *v);
-
+int		parser(char **value, t_stack **stack);
 
 
 /*
