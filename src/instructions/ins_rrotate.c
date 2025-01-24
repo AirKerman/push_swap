@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 15:29:33 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/20 16:18:43 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/22 15:26:11 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,33 +57,33 @@ void	rrr(t_stack **stack_a, t_stack **stack_b, int trigger)
 	if (trigger)
 		write(1, "rrr\n", 4);
 }
-
-t_stack *ft_lstcreate(int data)
+/*
+t_stack	*ft_lstcreate(int data)
 {
-    t_stack *newlst;
+	t_stack *newlst;
 
-    newlst = malloc(1 * sizeof(t_stack));
-    if (!newlst)
-        return (NULL);
-    newlst->value = data;
-    newlst->next = NULL;
-    return (newlst);
+	newlst = malloc(1 * sizeof(t_stack));
+	if (!newlst)
+		return (NULL);
+	newlst->value = data;
+	newlst->next = NULL;
+	return (newlst);
 }
 
-void    ft_lstadd_back(t_stack **chainz, t_stack *newnode)
+void	ft_lstadd_back(t_stack **chainz, t_stack *newnode)
 {
-    t_stack *head;
+	t_stack *head;
 
-    if (!*chainz)
-    {
-        *chainz = newnode;
-        return ;
-    }
-    head = *chainz;
-    while (*chainz && (*chainz)->next)
-        *chainz = (*chainz)->next;
-    (*chainz)->next = newnode;
-    *chainz = head;
+	if (!*chainz)
+	{
+		*chainz = newnode;
+		return ;
+	}
+	head = *chainz;
+	while (*chainz && (*chainz)->next)
+		*chainz = (*chainz)->next;
+	(*chainz)->next = newnode;
+	*chainz = head;
 }
 
 #include <stdio.h>
@@ -114,4 +114,4 @@ int main(void)
         printf("%d", ppa->value);
         ppa = ppa->next;
     }
-}
+}*/

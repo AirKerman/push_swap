@@ -6,22 +6,30 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:02:35 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/20 10:28:25 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/23 14:30:40 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-typedef struct t_list 
-{
-	int	value;
-	struct t_list	*next;
+# include <unistd.h>
+# include <stdlib.h>
 
+typedef struct t_list
+{
+	int				value;
+	struct t_list	*next;
 }	t_stack;
 
-#include <unistd.h>
-#include <stdlib.h>
+
+/*
+
+	Algorithm
+
+*/
+
+int	push_swap(t_stack **stack_a);
 
 /*
 
@@ -31,10 +39,11 @@ typedef struct t_list
 
 int		ft_arrlen(char **a);
 int		ft_strlen(const char *s);
-char    *ft_strdup(const char *s);
+int		ft_lstlen(t_stack *lst);
+char	*ft_strdup(const char *s);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	**ft_split(char const *s, char c);
-int     format_v(char *v);
+int		format_v(char *v);
 int		ft_atoi(char *s);
 t_stack	*create_element(int data);
 void	ft_lstadd_back(t_stack **lst, t_stack *node);
@@ -64,4 +73,3 @@ void	rrb(t_stack **stack, int trigger);
 void	rrr(t_stack **stack_a, t_stack **stack_b, int trigger);
 
 #endif
-

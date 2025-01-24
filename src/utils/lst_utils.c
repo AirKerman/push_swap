@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkerman <rkerman@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 17:22:47 by rkerman           #+#    #+#             */
-/*   Updated: 2024/11/08 22:28:53 by rkerman          ###   ########.fr       */
+/*   Created: 2025/01/23 14:18:15 by rkerman           #+#    #+#             */
+/*   Updated: 2025/01/24 14:36:08 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-int	ft_isalnum(int c)
+int	ft_lstsort(t_stack **stack)
 {
-	if ((c >= 48 && c <= 57)
-		|| (c >= 65 && c <= 90)
-		|| (c >= 97 && c <= 122))
-		return (1);
-	else
-		return (0);
+	int	current;
+		
 }
-/*
-#include <stdio.h>
 
-int	main()
+int	ft_lstlen(t_stack *lst)
 {
-	printf("%d\n", isalnum('5'));
-	printf("%d",isalnum(','));
+	int	count;
+
+	count = 0;
+	while (lst)
+	{
+		count++;
+		lst = lst->next;
+	}
+	return (count);
 }
-*/

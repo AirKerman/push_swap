@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkerman <rkerman@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/09 21:34:44 by rkerman           #+#    #+#             */
-/*   Updated: 2024/11/10 14:50:38 by rkerman          ###   ########.fr       */
+/*   Created: 2025/01/22 15:20:16 by rkerman           #+#    #+#             */
+/*   Updated: 2025/01/24 14:36:21 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-t_list	*ft_lstnew(void *content)
+void	push_swap(t_stack **stack_a, t_stack **stack_b)
 {
-	t_list	*new;
+	int	len;
 
-	new = malloc(sizeof(t_list));
-	if (new == NULL)
-		return (NULL);
-	new->content = content;
-	new->next = NULL;
-	return (new);
+	len = ft_lstlen(*stack_a);
+	if (!is_lstsort(stack_a))
+	{
+		
+	}
 }
+
