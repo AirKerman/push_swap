@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:02:35 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/23 14:30:40 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/25 16:04:21 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct t_list
 
 */
 
-int	push_swap(t_stack **stack_a);
+void	push_swap(t_stack **stack_a, t_stack **stack_b);
 
 /*
 
@@ -40,6 +40,7 @@ int	push_swap(t_stack **stack_a);
 int		ft_arrlen(char **a);
 int		ft_strlen(const char *s);
 int		ft_lstlen(t_stack *lst);
+int		ft_lstissort(t_stack *stack);
 char	*ft_strdup(const char *s);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	**ft_split(char const *s, char c);

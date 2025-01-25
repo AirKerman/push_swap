@@ -6,17 +6,23 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 14:18:15 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/24 14:36:08 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/25 16:06:48 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_lstsort(t_stack **stack)
+int	ft_lstissort(t_stack *stack)
 {
-	int	current;
-		
+	while (stack && stack->next)
+	{
+		if (stack->value > stack->next->value)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
 }
+
 
 int	ft_lstlen(t_stack *lst)
 {
