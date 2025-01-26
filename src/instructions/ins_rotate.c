@@ -6,13 +6,13 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 15:11:39 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/15 23:55:16 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/26 14:39:47 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ra(t_stack **stack, int trigger)
+void static	rotate(t_stack **stack)
 {
 	t_stack	*tmp;
 	t_stack	*head;
@@ -26,28 +26,21 @@ void	ra(t_stack **stack, int trigger)
 		tmp->next = NULL;
 		(*stack)->next = tmp;
 		*stack = head;
-		if (trigger)
-			write(1, "ra\n", 3);
 	}
+}
+
+void	ra(t_stack **stack, int trigger)
+{
+	rotate(stack);
+	if (trigger)
+		write(1, "ra\n", 3);
 }
 
 void	rb(t_stack **stack, int trigger)
 {
-	t_stack	*tmp;
-	t_stack	*head;
-
-	if (*stack && (*stack)->next)
-	{
-		tmp = *stack;
-		head = (*stack)->next;
-		while (*stack && (*stack)->next)
-			*stack = (*stack)->next;
-		tmp->next = NULL;
-		(*stack)->next = tmp;
-		*stack = head;
-		if (trigger)
-			write(1, "rb\n", 3);
-	}
+	rotate(stack);
+	if (trigger)
+		write(1, "rb\n", 3);
 }
 
 void	rr(t_stack **stack_a, t_stack **stack_b, int trigger)
