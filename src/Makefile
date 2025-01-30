@@ -14,5 +14,14 @@ RM			=	rm -f
 .PHONY:		all
 all:		$(NAME)
 
-$(NAME):	$(OBJS) $(INCLUDES)
-			$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) -o $(NAME)
+$(NAME):	$(OBJS)
+			$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+
+.PHONY:		fclean
+fclean:		$(OBJS)
+			$(RM) $(OBJS)
+
+.PHONY:		clean
+clean:		$(OBJS)
+			$(RM) $(OBJS) $(NAME)
+
