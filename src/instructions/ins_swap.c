@@ -6,13 +6,13 @@
 /*   By: rkerman <rkerman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:01:24 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/09 17:54:27 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/31 19:55:56 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sa(t_stack **stack, int trigger)
+static void	swap(t_stack **stack)
 {
 	t_stack	*tmp;
 
@@ -22,24 +22,21 @@ void	sa(t_stack **stack, int trigger)
 		(*stack)->next = tmp->next;
 		tmp->next = (*stack);
 		*stack = tmp;
-		if (trigger)
-			write (1, "sa\n", 3);
 	}
+}
+
+void	sa(t_stack **stack, int trigger)
+{
+	swap(stack);
+	if (trigger)
+		write(1, "sa\n", 3);
 }
 
 void	sb(t_stack **stack, int trigger)
 {
-	t_stack	*tmp;
-
-	if (*stack && (*stack)->next)
-	{
-		tmp = (*stack)->next;
-		(*stack)->next = tmp->next;
-		tmp->next = *stack;
-		*stack = tmp;
-		if (trigger)
-			write (1, "sb\n", 3);
-	}
+	swap(stack);
+	if (trigger)
+		write(1, "sb\n", 3);
 }
 
 void	ss(t_stack **stack_a, t_stack **stack_b, int trigger)

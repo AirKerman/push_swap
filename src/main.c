@@ -6,13 +6,12 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 23:15:04 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/30 15:17:32 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/31 20:10:37 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
-
 
 int	main(int argc, char **argv)
 {

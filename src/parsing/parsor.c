@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 17:56:24 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/20 09:51:27 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/31 19:47:14 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,9 @@ static int	stack_maker(char **v, t_stack **s)
 
 int	parser(char **value, t_stack **stack)
 {
-	int		i;
 	char	**arr;
 
 	arr = NULL;
-	i = 0;
 	while (*value)
 	{
 		arr = arr_fusion(arr, *value);

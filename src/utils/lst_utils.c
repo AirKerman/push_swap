@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 14:18:15 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/25 16:06:48 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/01/31 20:11:07 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	ft_lstissort(t_stack *stack)
 	}
 	return (1);
 }
-
 
 int	ft_lstlen(t_stack *lst)
 {
