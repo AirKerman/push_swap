@@ -6,7 +6,7 @@
 /*   By: rkerman <rkerman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 14:57:57 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/31 20:09:57 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/02/08 15:41:04 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	pa(t_stack **stack_a, t_stack **stack_b, int trigger)
 
 void	pb(t_stack **stack_a, t_stack **stack_b, int trigger)
 {
-	push(stack_a, stack_b)
+	push(stack_a, stack_b);
 	if (trigger)
 		write(1, "pb\n", 3);
 }

@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:02:35 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/31 20:10:23 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/02/08 15:38:52 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct t_list
 
 void	push_swap(t_stack **stack_a, t_stack **stack_b);
 void	ft_sortmin(t_stack **stack, int len);
+void	ft_sorter(t_stack **stack_a, t_stack **stack_b);
 
 /*
 
