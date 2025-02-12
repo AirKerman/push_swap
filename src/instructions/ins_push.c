@@ -6,7 +6,7 @@
 /*   By: rkerman <rkerman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 14:57:57 by rkerman           #+#    #+#             */
-/*   Updated: 2025/02/08 15:41:04 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/02/12 12:44:22 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	push(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack	*tmp;
 
-	if (stack_a && stack_b && *stack_a && *stack_b)
+	if (stack_a && *stack_a)
 	{
 		tmp = *stack_a;
 		*stack_a = (*stack_a)->next;
