@@ -6,12 +6,11 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:36:44 by rkerman           #+#    #+#             */
-/*   Updated: 2025/02/12 14:33:27 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/02/18 20:34:06 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 //void	print_list(t_stack )
 
