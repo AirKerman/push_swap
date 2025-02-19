@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:25:08 by rkerman           #+#    #+#             */
-/*   Updated: 2025/02/19 14:35:24 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/02/19 15:42:39 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,42 @@ int	is_min(t_stack *stack_a, t_stack *stack_b)
 	return (1);
 }
 
-int	position(t_stack *)
-
 void	ft_calcul_lowcost(t_stack *stack_a, t_stack *stack_b, int *t)
 {
-	int		current;
+	//int		current;
 	int		shotcount;
+	int		ia;
+	//int		ib;
 
+	ia = 0;
+	shotcount = 0;
 	while (stack_a)
 	{
-		if (is_min)
+		ia++;
+		if (is_min(stack_a, stack_b))
 		{
-			
+			if (ia == 1)
+			{
+				*t = stack_a->value;
+				shotcount = ia;
+				break ;
+			}
+			else if (!shotcount)
+			{
+				shotcount = ia;
+				*t = stack_a->value;
+			}
+			else if (ia < shotcount)
+			{
+				shotcount = ia;
+				*t = stack_a->value;
+			}
 		}
+		else
+		{
+
+		}
+		stack_a = stack_a->next;
 	}
 }
 
