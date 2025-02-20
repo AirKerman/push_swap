@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:25:08 by rkerman           #+#    #+#             */
-/*   Updated: 2025/02/19 15:47:36 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/02/20 15:42:18 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,22 @@ int	is_min(t_stack *stack_a, t_stack *stack_b)
 	return (1);
 }
 
+void	is_min_calcul(t_stack *stack_a, int i, int *sc, int *t)
+{
+	if (*i == 1)
+		*t = stack_a->value;
+	else if (!shotcount)
+	{
+		shotcount = ia;
+		*t = stack_a->value;
+	}
+	else if (*i < *sc)
+	{
+		*sc = *i;
+		*t = stack_a->value;
+	}
+}
+
 void	ft_calcul_lowcost(t_stack *stack_a, t_stack *stack_b, int *t)
 {
 	int		shotcount;
@@ -37,6 +53,15 @@ void	ft_calcul_lowcost(t_stack *stack_a, t_stack *stack_b, int *t)
 		ia++;
 		if (is_min(stack_a, stack_b))
 		{
+			is_min_calcul(stack_a, ia, &shotcount, t);
+			if (ia == 1)
+				break ;
+		}
+		/*
+		if (is_min(stack_a, stack_b))
+		{
+			is_min_calcul(stack_a, ia, &shotcount, t);
+			
 			if (ia == 1)
 			{
 				*t = stack_a->value;
@@ -53,11 +78,7 @@ void	ft_calcul_lowcost(t_stack *stack_a, t_stack *stack_b, int *t)
 				shotcount = ia;
 				*t = stack_a->value;
 			}
-		}
-		else
-		{
-			
-		}
+		}*/
 		stack_a = stack_a->next;
 	}
 }
