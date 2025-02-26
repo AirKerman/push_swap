@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:02:35 by rkerman           #+#    #+#             */
-/*   Updated: 2025/02/19 14:14:33 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/02/26 15:03:18 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ typedef struct t_list
 	int				value;
 	struct t_list	*next;
 }	t_stack;
+
+typedef struct	t_value
+{
+	int	shotcount;
+	int	target;
+	int	bullet;
+}	t_data;
 
 /*
 
