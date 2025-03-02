@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:25:08 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/02 19:18:59 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/02 21:48:18 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	is_new_max(t_stack *stack_a, t_stack *stack_b)
 {
 	while (stack_b)
 	{
-		if (stack_a < stack_b)
+		if (stack_a->value < stack_b->value)
 			return (0);
 		stack_b = stack_b->next;
 	}
@@ -91,15 +91,22 @@ void	is_min_or_max_calcul(t_stack *stack_a, t_stack *stack_b, t_stat *p, int i)
 		lst_lenb = ft_lstlen(stack_b);
 		if (max_posb > lst_lenb / 2 && i > lst_lena / 2)
 		{
-			
+			if ((lst_lena - i) > (lst_lenb - max_posb))
+				shot = lst_lena - i + 1;
+			else
+				shot = lst_lenb - max_posb + 1;
 		}
-			/*
-			shot = lst_lenb - max_posb + 1;
-			*/
-		/*
+		else if (max_posb < lst_lenb / 2 && i < lst_lena / 2)
+		{
+			if (i > max_posb)
+				shot = i + 1;
+			else
+				shot = max_posb + 1;
+		}
+		else if (max_posb < lst_lenb / 2 && i >= lst_lena / 2)
+			shot = max_posb + (lst_lena - i) + 1;
 		else
-			shot = max_posb + 1;
-		*/
+			shot = i + (lst_lenb - max_posb) + 1;
 		if (shot < p->shotcount)
 			p->shotcount = shot;
 	}
