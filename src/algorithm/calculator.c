@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:25:08 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/02 21:55:02 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/02 21:58:26 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,20 @@ int	who_is_max(t_stack *stack)
 		stack = stack->next;
 	}
 	return (max);
+}
+
+int	get_pos(t_stack *stack, int data)
+{
+	int	i;
+
+	i = 0;
+	while (stack)
+	{
+		if (stack->value == data)
+			return (i);
+		stack = stack->next;
+		i++;
+	}
 }
 
 void	is_min_or_max_calcul(t_stack *stack_a, t_stack *stack_b, t_stat *p, int i)
