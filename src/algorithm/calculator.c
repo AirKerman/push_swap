@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:25:08 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/02 18:33:31 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/02 19:18:59 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	is_min_or_max_calcul(t_stack *stack_a, t_stack *stack_b, t_stat *p, int i)
 		lst_lenb = ft_lstlen(stack_b);
 		if (max_posb > lst_lenb / 2 && i > lst_lena / 2)
 		{
-		
+			
 		}
 			/*
 			shot = lst_lenb - max_posb + 1;
