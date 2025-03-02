@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:25:08 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/02 21:48:18 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/02 21:55:02 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,7 @@ void	is_min_or_max_calcul(t_stack *stack_a, t_stack *stack_b, t_stat *p, int i)
 	int	shot;
 
 	if (!i && !pos_max(stack_b) && (!p->shotcount || p->shotcount > 1))
-	{
-		p->shotcount = 1;
-		p->bullet = stack_a->value;
-		p->target = stack_b->value;
-	}
+		shot = 1;
 	else
 	{
 		lst_lena = ft_lstlen(stack_a) + i;
@@ -107,8 +103,12 @@ void	is_min_or_max_calcul(t_stack *stack_a, t_stack *stack_b, t_stat *p, int i)
 			shot = max_posb + (lst_lena - i) + 1;
 		else
 			shot = i + (lst_lenb - max_posb) + 1;
-		if (shot < p->shotcount)
+		if (shot < p->shotcount || !p->shotcount)
+		{
 			p->shotcount = shot;
+			p->bullet = stack_a->value;
+			p->target = stack_b->value;
+		}
 	}
 }
 
