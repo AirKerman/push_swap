@@ -6,14 +6,14 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:25:08 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/01 21:04:52 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/02 16:10:22 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-int	is_min(t_stack *stack_a, t_stack *stack_b)
+int	is_new_min(t_stack *stack_a, t_stack *stack_b)
 {
 	while (stack_b)
 	{
@@ -24,7 +24,7 @@ int	is_min(t_stack *stack_a, t_stack *stack_b)
 	return (1);
 }
 
-int	is_max(t_stack *stack_a, t_stack *stack_b)
+int	is_new_max(t_stack *stack_a, t_stack *stack_b)
 {
 	while (stack_b)
 	{
@@ -43,32 +43,60 @@ int	pos_max(t_stack *stack)
 
 	i = 0;
 	max = stack->value;
+	max_pos = i;
 	while (stack)
 	{
-		i++;
 		if (stack->value > max)
 		{
 			max = stack->value;
 			max_pos = i;
 		}
-		i++
+		i++;
 		stack = stack->next;
 	}
 	return (max_pos);
 }
-/*
-void	is_min_or_max_calcul(t_stack *stack_a, t_stack *stack_b, t_data *p, int i)
+
+int	who_is_max(t_stack *stack)
 {
-	if (is_max(stack_a, stack_b))
+	int	max;
+
+	max = stack->value;
+	while (stack)
 	{
-		
+		if (max < stack->value)
+			max = stack->value;
+		stack = stack->next;
 	}
-	else if (is_min(stack_a, stack_b))
+	return (max);
+}
+
+
+void	is_min_or_max_calcul(t_stack *stack_a, t_stack *stack_b, t_stat *p)
+{
+	int	max_pos;
+	int	lst_len;
+	int	shot;
+
+	if (!pos_max(stack_b) && (!p->shotcount || p->shotcount > 1))
 	{
-		
+		p->shotcount = 1;
+		p->bullet = stack_a->value;
+		p->target = stack_b->value;
+	}
+	else
+	{
+		max_pos = pos_max(stack_b);
+		lst_len = ft_lstlen(stack_b);
+		if (max_pos > lst_len / 2)
+			shot = lst_len - max_pos + 1;
+		else
+			shot = max_pos + 1;
+		if (shot < p->shotcount)
+			p->shotcount = shot;
 	}
 }
-*/
+
 void	panel_init(t_stat *panel)
 {
 	panel->shotcount = 0;
@@ -76,19 +104,15 @@ void	panel_init(t_stat *panel)
 	panel->bullet = 0;
 }
 
-void	ft_calcul_lowcost(t_stack *stack_a, t_stack *stack_b)
+void	ft_calcul_lowcost(t_stack *stack_a, t_stack *stack_b, t_stat *panel)
 {
 	int		ia;
 	
 	ia = 0;
 	while (stack_a)
 	{
-		if (is_min(stack_a, stack_b) || is_max(stack_a, stack_b))
-			return ;//is_min_or_max_calcul(stack_a, stack_b, panel, ia);
-		else
-		{
-			
-		}
+		if (is_new_min(stack_a, stack_b) || is_new_max(stack_a, stack_b))
+			is_min_or_max_calcul(stack_a, stack_b, panel);
 		ia++;
 		stack_a = stack_a->next;
 	}
@@ -99,8 +123,6 @@ void	ft_calcul_and_execute(t_stack **stack_a, t_stack **stack_b)
 	t_stat panel;
 
 	panel_init(&panel);
-	printf("%d\n", pos_max(*stack_a));
-	printf("%d\n", pos_max(*stack_b));
-	ft_calcul_lowcost(*stack_a, *stack_b);
+	ft_calcul_lowcost(*stack_a, *stack_b, &panel);
 	//ft_execute();
 }
