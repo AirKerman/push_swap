@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:25:08 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/02 16:10:22 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/02 18:33:31 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,14 @@ int	who_is_max(t_stack *stack)
 	return (max);
 }
 
-
-void	is_min_or_max_calcul(t_stack *stack_a, t_stack *stack_b, t_stat *p)
+void	is_min_or_max_calcul(t_stack *stack_a, t_stack *stack_b, t_stat *p, int i)
 {
-	int	max_pos;
-	int	lst_len;
+	int	max_posb;
+	int	lst_lenb;
+	int	lst_lena;
 	int	shot;
 
-	if (!pos_max(stack_b) && (!p->shotcount || p->shotcount > 1))
+	if (!i && !pos_max(stack_b) && (!p->shotcount || p->shotcount > 1))
 	{
 		p->shotcount = 1;
 		p->bullet = stack_a->value;
@@ -86,12 +86,20 @@ void	is_min_or_max_calcul(t_stack *stack_a, t_stack *stack_b, t_stat *p)
 	}
 	else
 	{
-		max_pos = pos_max(stack_b);
-		lst_len = ft_lstlen(stack_b);
-		if (max_pos > lst_len / 2)
-			shot = lst_len - max_pos + 1;
+		lst_lena = ft_lstlen(stack_a) + i;
+		max_posb = pos_max(stack_b);
+		lst_lenb = ft_lstlen(stack_b);
+		if (max_posb > lst_lenb / 2 && i > lst_lena / 2)
+		{
+		
+		}
+			/*
+			shot = lst_lenb - max_posb + 1;
+			*/
+		/*
 		else
-			shot = max_pos + 1;
+			shot = max_posb + 1;
+		*/
 		if (shot < p->shotcount)
 			p->shotcount = shot;
 	}
@@ -112,7 +120,7 @@ void	ft_calcul_lowcost(t_stack *stack_a, t_stack *stack_b, t_stat *panel)
 	while (stack_a)
 	{
 		if (is_new_min(stack_a, stack_b) || is_new_max(stack_a, stack_b))
-			is_min_or_max_calcul(stack_a, stack_b, panel);
+			is_min_or_max_calcul(stack_a, stack_b, panel, ia);
 		ia++;
 		stack_a = stack_a->next;
 	}
