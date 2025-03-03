@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:25:08 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/03 14:39:37 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/03 22:15:59 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,65 +128,30 @@ void	is_min_or_max_calcul(t_stack *stack_a, t_stack *stack_b, t_stat *p, int i)
 	}
 }
 
-/*
-
-	La cible est un chiffre qui est plus petit que le chiffre a placer mais plus grand que tout les autres qui son plus petit que la cible
-	En gros c est le plus grand des plus petit de la cible
-
-*/
-
-
-int	count_low(int value, t_stack *stack_b)
-{
-	int	count;
-
-	count = 0;
-	while (stack_b)
-	{
-		if (value > stack_b->value)
-			count++;
-		stack_b = stack_b->next;
-	}
-	return (count);
-}
-
 int	target_finder(t_stack *stack_a, t_stack *stack_b)
 {
-	const t_stack	*save;
-	int	*tabint;
-	int	i;
 	int	target;
 
-	tabint = malloc(count_low(stack_a->value, stack_b) * sizeof(int));
-	if (!tabint)
-		return (0);
-	i = 0;
-	save = stack_b;
 	while (stack_b)
 	{
-		if (stack_a->value > stack_b->value)
-		{
-			tabint[i] = stack_b->value;
-			i++;
-		}
+		if (stack_b->value < stack_a->value)
+			break;
 		stack_b = stack_b->next;
 	}
-	tabint[i] = 0;
-	i = 0;
-	target = tabint[i];
-	while (i < count_low(stack_a->value, stack_b))
+	target = stack_b->value;
+	while (stack_b)
 	{
-		i++;
-		if (target < tabint[i])
-			target = tabint[i];
+		if (stack_b->value < stack_a->value && target < stack_b->value )
+			target = stack_b->value;
+		stack_b = stack_b->next;
 	}
-	free(tabint);
 	return (target);
 }
 
 void	is_random_num_calcul(t_stack *stack_a, t_stack *stack_b/*, t_stat *p, int i*/)
 {
-	target_finder(stack_a, stack_b);	
+	target_finder(stack_a, stack_b);
+	
 }
 
 void	panel_init(t_stat *panel)
