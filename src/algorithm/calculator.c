@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:25:08 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/02 21:58:26 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/03 13:44:15 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,9 @@ int	get_pos(t_stack *stack, int data)
 		stack = stack->next;
 		i++;
 	}
+	return (0);
 }
+
 
 void	is_min_or_max_calcul(t_stack *stack_a, t_stack *stack_b, t_stat *p, int i)
 {
@@ -99,7 +101,7 @@ void	is_min_or_max_calcul(t_stack *stack_a, t_stack *stack_b, t_stat *p, int i)
 		lst_lena = ft_lstlen(stack_a) + i;
 		max_posb = pos_max(stack_b);
 		lst_lenb = ft_lstlen(stack_b);
-		if (max_posb > lst_lenb / 2 && i > lst_lena / 2)
+		if (max_posb >= lst_lenb / 2 && i >= lst_lena / 2)
 		{
 			if ((lst_lena - i) > (lst_lenb - max_posb))
 				shot = lst_lena - i + 1;
@@ -117,13 +119,23 @@ void	is_min_or_max_calcul(t_stack *stack_a, t_stack *stack_b, t_stat *p, int i)
 			shot = max_posb + (lst_lena - i) + 1;
 		else
 			shot = i + (lst_lenb - max_posb) + 1;
-		if (shot < p->shotcount || !p->shotcount)
-		{
-			p->shotcount = shot;
-			p->bullet = stack_a->value;
-			p->target = stack_b->value;
-		}
 	}
+	if (shot < p->shotcount || !p->shotcount)
+	{
+		p->shotcount = shot;
+		p->bullet = stack_a->value;
+		p->target = stack_b->value;
+	}
+}
+
+int	find_location(t_stack *stack_a, t_stack *stack_b)
+{
+
+}
+
+void	is_random_num_calcul(t_stack *stack_a, t_stack *stack_b, t_stat *p, int i)
+{
+	
 }
 
 void	panel_init(t_stat *panel)
@@ -142,6 +154,8 @@ void	ft_calcul_lowcost(t_stack *stack_a, t_stack *stack_b, t_stat *panel)
 	{
 		if (is_new_min(stack_a, stack_b) || is_new_max(stack_a, stack_b))
 			is_min_or_max_calcul(stack_a, stack_b, panel, ia);
+		else
+			is_random_num_calcul(stack_a, stack_b, panel, ia)
 		ia++;
 		stack_a = stack_a->next;
 	}
