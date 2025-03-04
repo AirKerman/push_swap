@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:25:08 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/03 22:15:59 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/04 21:35:19 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,40 +86,43 @@ int	get_pos(t_stack *stack, int data)
 	return (0);
 }
 
+int	shot_calcul(int len_a, int len_b, int pos_target, int i)
+{
+	int	shot;
+
+	shot = 0;
+	if (pos_target >= len_b / 2 && i >= len_a / 2)
+	{
+		if ((len_a - i) > (len_b - pos_target))
+			shot = len_a - i + 1;
+		else
+			shot = len_b - pos_target + 1;
+	}
+	else if ((pos_target < len_b / 2 && i < len_a / 2)
+		|| (i < len_a / 2 && len_b < 4 && pos_target < 2)
+		|| (pos_target < len_b / 2 && len_a < 4 && i < 2))
+		
+	{
+		if (i > pos_target)
+			shot = i + 1;
+		else
+			shot = pos_target + 1;
+	}
+	else if ((pos_target < len_b / 2 && i > len_a / 2) || (i == len_a / 2 && len_a % 2 == 0))
+		shot = pos_target + (len_a - i) + 1;
+	else
+		shot = i + (len_b - pos_target) + 1;
+	return (shot);
+}
 
 void	is_min_or_max_calcul(t_stack *stack_a, t_stack *stack_b, t_stat *p, int i)
 {
-	int	max_posb;
-	int	lst_lenb;
-	int	lst_lena;
 	int	shot;
 
 	if (!i && !pos_max(stack_b) && (!p->shotcount || p->shotcount > 1))
 		shot = 1;
 	else
-	{
-		lst_lena = ft_lstlen(stack_a) + i;
-		max_posb = pos_max(stack_b);
-		lst_lenb = ft_lstlen(stack_b);
-		if (max_posb >= lst_lenb / 2 && i >= lst_lena / 2)
-		{
-			if ((lst_lena - i) > (lst_lenb - max_posb))
-				shot = lst_lena - i + 1;
-			else
-				shot = lst_lenb - max_posb + 1;
-		}
-		else if (max_posb < lst_lenb / 2 && i < lst_lena / 2)
-		{
-			if (i > max_posb)
-				shot = i + 1;
-			else
-				shot = max_posb + 1;
-		}
-		else if (max_posb < lst_lenb / 2 && i >= lst_lena / 2)
-			shot = max_posb + (lst_lena - i) + 1;
-		else
-			shot = i + (lst_lenb - max_posb) + 1;
-	}
+		shot = shot_calcul(ft_lstlen(stack_a) + i, ft_lstlen(stack_b), pos_max(stack_b), i);
 	if (shot < p->shotcount || !p->shotcount)
 	{
 		p->shotcount = shot;
@@ -148,10 +151,17 @@ int	target_finder(t_stack *stack_a, t_stack *stack_b)
 	return (target);
 }
 
-void	is_random_num_calcul(t_stack *stack_a, t_stack *stack_b/*, t_stat *p, int i*/)
+void	is_random_num_calcul(t_stack *stack_a, t_stack *stack_b, t_stat *p, int i)
 {
-	target_finder(stack_a, stack_b);
-	
+	int	shot;
+
+	shot = shot_calcul(ft_lstlen(stack_a) + i, ft_lstlen(stack_b), get_pos(stack_b, target_finder(stack_a, stack_b)), i);
+	if (shot < p->shotcount || !p->shotcount)
+	{
+		p->shotcount = shot;
+		p->bullet = stack_a->value;
+		p->target = target_finder(stack_a, stack_b);
+	}
 }
 
 void	panel_init(t_stat *panel)
@@ -171,7 +181,7 @@ void	ft_calcul_lowcost(t_stack *stack_a, t_stack *stack_b, t_stat *panel)
 		if (is_new_min(stack_a, stack_b) || is_new_max(stack_a, stack_b))
 			is_min_or_max_calcul(stack_a, stack_b, panel, ia);
 		else
-			is_random_num_calcul(stack_a, stack_b/*, panel, ia*/);
+			is_random_num_calcul(stack_a, stack_b, panel, ia);
 		ia++;
 		stack_a = stack_a->next;
 	}
