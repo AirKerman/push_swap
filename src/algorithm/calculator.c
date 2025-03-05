@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:25:08 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/05 16:09:35 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/05 22:52:13 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,10 +127,15 @@ int	bellow_med(int len_a, int len_b, int pos_target, int pos_bullet)
 		&& (pos_target - pos_bullet ) < (len_b - pos_target))
 		|| (pos_target < len_b / 2 && pos_bullet >= len_a / 2
 		&& ((pos_bullet - pos_target) < (len_a - pos_bullet))))
-		{
-
-		}
+	{
+		if (i > pos_target)
+			shot = i + 1;
+		else
+			shot = pos_target + 1;
+	}
+	return (shot);
 }
+
 int	top_med(int len_a, int len_b, int pos_target, int pos_bullet)
 {
 	int	shot;
@@ -138,20 +143,29 @@ int	top_med(int len_a, int len_b, int pos_target, int pos_bullet)
 	shot = 0;
 	if ((pos_bullet > len_a / 2 && pos_target > len_b / 2)
 		|| (pos_bullet == len_a / 2 && len_a % 2 == 0
-		&& pos_target == len_b / 2 && len_b % 2 == 0))
+		&& pos_target == len_b / 2 && len_b % 2 == 0)
+		|| (pos_bullet > len_a / 2 && pos_target <= len_b / 2
+		&& (len_b - (pos_target + (len_a - pos_bullet))) < pos_target)
+		|| (pos_target > len_b / 2 && pos_bullet <= len_a / 2
+		&& (len_a - (pos_bullet + (len_a - pos_target))) < pos_bullet)
+		)
 	{
-	
+		if ((len_a - i) > (len_b - pos_target))
+			shot = len_a - i + 1;
+		else
+			shot = len_b - pos_target + 1;
 	}
 	return (shot);
 }
-
-
 
 int	shot_calcul(int len_a, int len_b, int pos_target, int i)
 {
 	int	shot;
 
-	shot = top_med(len_a, len_b, pos_target, i);
+	shot = bellow_med(len_a, len_b, pos_target, i);
+	if (!shot)
+		top_med(len_a, len_b, pos_target, i);
+
 	/*
 	if (pos_target >= len_b / 2 && i >= len_a / 2)
 	{
