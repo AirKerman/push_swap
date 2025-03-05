@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:25:08 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/04 21:35:19 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/05 15:32:51 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,64 @@ int	get_pos(t_stack *stack, int data)
 	return (0);
 }
 
-int	shot_calcul(int len_a, int len_b, int pos_target, int i)
+/*
+
+	si les deux son proche du centre suivre 1 direction peux raccourcir le chemin et faire econimisez des coups par la suite
+
+	par exemple 
+	
+	stack_a :
+	1 2 3 4 5 6 7 8 9
+
+	stack_b :
+	10 11 12 13 14 15 16 17 18
+
+	en voulant par exemple deplacer le 13 et le 6 il serais + judicieux de faire un coup combiner pour deplacer le 6 en 1 ere place
+	avec le 13 il restera - de coup a faire et cela divisera le nombre de coup effectuer donc apres le deplacement de 6 mmh enfin de
+	compte deplacer le 13 combiner du 6 avec un rr serais plus rentable (economie de 1 constant)
+
+	il serais + judicieux de commencer par le combiner en rr et pas en rrr le rrr est seulement si le rr n est pas rentable car le rr
+	est toujours plus avantageux
+
+	plus qu a trouver comment savoir si cest rentable de rr a la place de rrr pour ca il faudra stocker le nombre de coup en rrr et en rr
+	des deux valeur afin dy concocter une formule qui aura la solution il faudrais donc regarder si le fais de deplacer les 2 en meme temps
+	reduirais drastiquement ca position de la premiere place donc occupons nous de la fonction des rr
+
+	rrshot = (len - pos) = coup en reverse rotate
+
+	desormais il faut voir ou ce situation le chiffre concerner par un reverse rotate apres lexecution du rotate classic donc 
+	shotrotate classic - positionceluienreverserotate
+*/
+
+int	bellow_med(int len_a, int len_b, int pos_target, int pos_bullet)
 {
 	int	shot;
 
 	shot = 0;
+	if ()
+}
+int	top_med(int len_a, int len_b, int pos_target, int pos_bullet)
+{
+	int	shot;
+
+	shot = 0;
+	if ((pos_bullet > len_a / 2 && pos_target > len_b / 2)
+		|| (pos_bullet == len_a / 2 && len_a % 2 == 0
+		&& pos_target == len_b / 2 && len_b % 2 == 0))
+	{
+	
+	}
+	return (shot);
+}
+
+
+
+int	shot_calcul(int len_a, int len_b, int pos_target, int i)
+{
+	int	shot;
+
+	shot = top_med(len_a, len_b, pos_target, i);
+	/*
 	if (pos_target >= len_b / 2 && i >= len_a / 2)
 	{
 		if ((len_a - i) > (len_b - pos_target))
@@ -111,7 +164,7 @@ int	shot_calcul(int len_a, int len_b, int pos_target, int i)
 	else if ((pos_target < len_b / 2 && i > len_a / 2) || (i == len_a / 2 && len_a % 2 == 0))
 		shot = pos_target + (len_a - i) + 1;
 	else
-		shot = i + (len_b - pos_target) + 1;
+		shot = i + (len_b - pos_target) + 1;*/
 	return (shot);
 }
 
