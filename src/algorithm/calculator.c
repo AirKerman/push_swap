@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:25:08 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/05 22:52:13 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/05 23:44:26 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,8 @@ int	bellow_med(int len_a, int len_b, int pos_target, int pos_bullet)
 		|| (pos_target < len_b / 2 && pos_bullet >= len_a / 2
 		&& ((pos_bullet - pos_target) < (len_a - pos_bullet))))
 	{
-		if (i > pos_target)
-			shot = i + 1;
+		if (pos_bullet > pos_target)
+			shot = pos_target + 1;
 		else
 			shot = pos_target + 1;
 	}
@@ -150,8 +150,8 @@ int	top_med(int len_a, int len_b, int pos_target, int pos_bullet)
 		&& (len_a - (pos_bullet + (len_a - pos_target))) < pos_bullet)
 		)
 	{
-		if ((len_a - i) > (len_b - pos_target))
-			shot = len_a - i + 1;
+		if ((len_a - pos_bullet) > (len_b - pos_target))
+			shot = len_a - pos_bullet + 1;
 		else
 			shot = len_b - pos_target + 1;
 	}
@@ -164,7 +164,13 @@ int	shot_calcul(int len_a, int len_b, int pos_target, int i)
 
 	shot = bellow_med(len_a, len_b, pos_target, i);
 	if (!shot)
+	{
 		top_med(len_a, len_b, pos_target, i);
+		if (!shot && ((pos_target < len_b / 2 && i > len_a / 2) || (i == len_a / 2 && len_a % 2 == 0)))
+			shot = pos_target + (len_a - i) + 1;
+		else
+			shot = i + (len_b - pos_target) + 1;
+	}
 
 	/*
 	if (pos_target >= len_b / 2 && i >= len_a / 2)
