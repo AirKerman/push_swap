@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:25:08 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/05 23:44:26 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/06 14:50:33 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,13 +123,13 @@ int	bellow_med(int len_a, int len_b, int pos_target, int pos_bullet)
 	if ((pos_bullet < len_a / 2 && pos_target < len_b / 2)
 		|| (pos_bullet == len_a / 2 && len_a % 2 > 0
 		&& pos_target == len_b / 2 && len_b % 2 > 0)
-		|| (pos_bullet < len_a / 2 && pos_target >= len_b / 2
-		&& (pos_target - pos_bullet ) < (len_b - pos_target))
-		|| (pos_target < len_b / 2 && pos_bullet >= len_a / 2
-		&& ((pos_bullet - pos_target) < (len_a - pos_bullet))))
+		|| (pos_bullet <= len_a / 2 && pos_target >= len_b / 2
+		&& (pos_target - pos_bullet ) <= (len_b - pos_target))
+		|| (pos_target <= len_b / 2 && pos_bullet >= len_a / 2
+		&& ((pos_bullet - pos_target) <= (len_a - pos_bullet))))
 	{
 		if (pos_bullet > pos_target)
-			shot = pos_target + 1;
+			shot = pos_bullet + 1;
 		else
 			shot = pos_target + 1;
 	}
@@ -147,7 +147,7 @@ int	top_med(int len_a, int len_b, int pos_target, int pos_bullet)
 		|| (pos_bullet > len_a / 2 && pos_target <= len_b / 2
 		&& (len_b - (pos_target + (len_a - pos_bullet))) < pos_target)
 		|| (pos_target > len_b / 2 && pos_bullet <= len_a / 2
-		&& (len_a - (pos_bullet + (len_a - pos_target))) < pos_bullet)
+		&& (len_a - (pos_bullet + (len_a - pos_target))) <= pos_bullet)
 		)
 	{
 		if ((len_a - pos_bullet) > (len_b - pos_target))
