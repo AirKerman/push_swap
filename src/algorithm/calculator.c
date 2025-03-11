@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:25:08 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/06 14:50:33 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/11 15:09:09 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,9 +124,9 @@ int	bellow_med(int len_a, int len_b, int pos_target, int pos_bullet)
 		|| (pos_bullet == len_a / 2 && len_a % 2 > 0
 		&& pos_target == len_b / 2 && len_b % 2 > 0)
 		|| (pos_bullet <= len_a / 2 && pos_target >= len_b / 2
-		&& (pos_target - pos_bullet ) <= (len_b - pos_target))
+		&& (pos_target - pos_bullet ) <=  pos_bullet + (len_b - pos_target))
 		|| (pos_target <= len_b / 2 && pos_bullet >= len_a / 2
-		&& ((pos_bullet - pos_target) <= (len_a - pos_bullet))))
+		&& ((pos_bullet - pos_target) <= pos_target + (len_a - pos_bullet))))
 	{
 		if (pos_bullet > pos_target)
 			shot = pos_bullet + 1;
@@ -268,7 +268,7 @@ void	ft_calcul_lowcost(t_stack *stack_a, t_stack *stack_b, t_stat *panel)
 		stack_a = stack_a->next;
 	}
 }
-
+100 1    2 3 4 5 6
 void	ft_calcul_and_execute(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stat panel;
