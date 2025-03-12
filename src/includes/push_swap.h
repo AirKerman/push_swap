@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:02:35 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/12 13:29:41 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/12 16:25:52 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	ft_calcul_and_execute(t_stack **stack_a, t_stack **stack_b);
 
 */
 
+int		pos_max(t_stack *stack);
 int		ft_arrlen(char **a);
 int		ft_strlen(const char *s);
 int		ft_lstlen(t_stack *lst);
