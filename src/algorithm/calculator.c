@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:25:08 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/11 15:09:09 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/12 15:27:32 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,47 +115,36 @@ int	get_pos(t_stack *stack, int data)
 	shotrotate classic - positionceluienreverserotate
 */
 
+int	cmp_shot(int shot_a, int shot_b)
+{
+	if (shot_b > shot_a)
+		return (shot_b);
+	else
+		return (shot_a);
+}
+
 int	bellow_med(int len_a, int len_b, int pos_target, int pos_bullet)
 {
-	int	shot;
-
-	shot = 0;
-	if ((pos_bullet < len_a / 2 && pos_target < len_b / 2)
-		|| (pos_bullet == len_a / 2 && len_a % 2 > 0
-		&& pos_target == len_b / 2 && len_b % 2 > 0)
-		|| (pos_bullet <= len_a / 2 && pos_target >= len_b / 2
-		&& (pos_target - pos_bullet ) <=  pos_bullet + (len_b - pos_target))
-		|| (pos_target <= len_b / 2 && pos_bullet >= len_a / 2
-		&& ((pos_bullet - pos_target) <= pos_target + (len_a - pos_bullet))))
-	{
-		if (pos_bullet > pos_target)
-			shot = pos_bullet + 1;
-		else
-			shot = pos_target + 1;
-	}
-	return (shot);
+	if ((pos_bullet <= len_a / 2 && pos_target <= len_b / 2)
+		|| (pos_bullet <= len_a / 2 && pos_target > len_b / 2
+		&& cmp_shot(pos_bullet, pos_target) <= cmp_shot(len_a - pos_bullet, len_b - pos_target))
+		|| (pos_target <= len_b / 2 && pos_bullet > len_a / 2
+		&& cmp_shot(pos_bullet, pos_target) <= cmp_shot(len_a - pos_bullet, len_b - pos_target))		
+		)
+		return (cmp_shot(pos_bullet, pos_target) + 1);
+	return (0);
 }
 
 int	top_med(int len_a, int len_b, int pos_target, int pos_bullet)
 {
-	int	shot;
-
-	shot = 0;
 	if ((pos_bullet > len_a / 2 && pos_target > len_b / 2)
-		|| (pos_bullet == len_a / 2 && len_a % 2 == 0
-		&& pos_target == len_b / 2 && len_b % 2 == 0)
-		|| (pos_bullet > len_a / 2 && pos_target <= len_b / 2
-		&& (len_b - (pos_target + (len_a - pos_bullet))) < pos_target)
-		|| (pos_target > len_b / 2 && pos_bullet <= len_a / 2
-		&& (len_a - (pos_bullet + (len_a - pos_target))) <= pos_bullet)
+		|| (pos_bullet >= len_a / 2 && pos_target < len_b / 2 
+		&& cmp_shot(pos_bullet, pos_target) > cmp_shot(len_a - pos_bullet, len_b - pos_target))
+		|| (pos_target <= len_b / 2 && pos_bullet > len_a / 2 
+		&& cmp_shot(pos_bullet, pos_target) > cmp_shot(len_a - pos_bullet, len_b - pos_target))
 		)
-	{
-		if ((len_a - pos_bullet) > (len_b - pos_target))
-			shot = len_a - pos_bullet + 1;
-		else
-			shot = len_b - pos_target + 1;
-	}
-	return (shot);
+		return (cmp_shot(len_a - pos_bullet, len_b - pos_target) + 1);
+	return (0);
 }
 
 int	shot_calcul(int len_a, int len_b, int pos_target, int i)
@@ -165,35 +154,12 @@ int	shot_calcul(int len_a, int len_b, int pos_target, int i)
 	shot = bellow_med(len_a, len_b, pos_target, i);
 	if (!shot)
 	{
-		top_med(len_a, len_b, pos_target, i);
-		if (!shot && ((pos_target < len_b / 2 && i > len_a / 2) || (i == len_a / 2 && len_a % 2 == 0)))
+		shot = top_med(len_a, len_b, pos_target, i);
+		if (!shot && pos_target <= len_b / 2)
 			shot = pos_target + (len_a - i) + 1;
-		else
+		else if (!shot)
 			shot = i + (len_b - pos_target) + 1;
 	}
-
-	/*
-	if (pos_target >= len_b / 2 && i >= len_a / 2)
-	{
-		if ((len_a - i) > (len_b - pos_target))
-			shot = len_a - i + 1;
-		else
-			shot = len_b - pos_target + 1;
-	}
-	else if ((pos_target < len_b / 2 && i < len_a / 2)
-		|| (i < len_a / 2 && len_b < 4 && pos_target < 2)
-		|| (pos_target < len_b / 2 && len_a < 4 && i < 2))
-		
-	{
-		if (i > pos_target)
-			shot = i + 1;
-		else
-			shot = pos_target + 1;
-	}
-	else if ((pos_target < len_b / 2 && i > len_a / 2) || (i == len_a / 2 && len_a % 2 == 0))
-		shot = pos_target + (len_a - i) + 1;
-	else
-		shot = i + (len_b - pos_target) + 1;*/
 	return (shot);
 }
 
@@ -209,7 +175,7 @@ void	is_min_or_max_calcul(t_stack *stack_a, t_stack *stack_b, t_stat *p, int i)
 	{
 		p->shotcount = shot;
 		p->bullet = stack_a->value;
-		p->target = stack_b->value;
+		p->target = who_is_max(stack_b);
 	}
 }
 
@@ -268,12 +234,43 @@ void	ft_calcul_lowcost(t_stack *stack_a, t_stack *stack_b, t_stat *panel)
 		stack_a = stack_a->next;
 	}
 }
-100 1    2 3 4 5 6
+
+//3 1 5 4 5435 654 7654
+
+void	ft_execute(t_stack **stack_a, t_stack **stack_b, t_stat *panel)
+{
+	if (bellow_med(ft_lstlen(*stack_a), ft_lstlen(*stack_b), get_pos(*stack_b, panel->target), get_pos(*stack_a, panel->bullet)))
+	{
+		while (get_pos(*stack_b, panel->target) && get_pos(*stack_a, panel->bullet))
+			rr(stack_a, stack_b, 1);
+	}
+	else if (top_med(ft_lstlen(*stack_a), ft_lstlen(*stack_b), get_pos(*stack_b, panel->target), get_pos(*stack_a, panel->bullet)))
+	{
+		while (get_pos(*stack_b, panel->target) && get_pos(*stack_a, panel->bullet))
+			rrr(stack_a, stack_b, 1);
+	}
+	while (get_pos(*stack_a, panel->bullet))
+	{
+		if (get_pos(*stack_a, panel->bullet) <= ft_lstlen(*stack_a) / 2)
+			ra(stack_a, 1);
+		else
+			rra(stack_a, 1);
+	}
+	while (get_pos(*stack_b, panel->target))
+	{
+		if (get_pos(*stack_b, panel->target) <= ft_lstlen(*stack_b) / 2)
+			rb(stack_b, 1);
+		else
+			rrb(stack_b, 1);
+	}
+	pb(stack_a, stack_b, 1);
+}
+
 void	ft_calcul_and_execute(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stat panel;
 
 	panel_init(&panel);
 	ft_calcul_lowcost(*stack_a, *stack_b, &panel);
-	//ft_execute();
+	ft_execute(stack_a, stack_b, &panel);
 }
