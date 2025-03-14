@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:25:08 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/14 13:13:24 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/14 16:05:09 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,20 @@ int	who_is_max(t_stack *stack)
 	return (max);
 }
 
+int	who_is_min(t_stack *stack)
+{
+	int	min;
+
+	min = stack->value;
+	while (stack)
+	{
+		if (min > stack->value)
+			min = stack->value;
+		stack = stack->next;
+	}
+	return (min);
+}
+
 int	get_pos(t_stack *stack, int data)
 {
 	int	i;
@@ -96,7 +110,8 @@ int	cmp_shot(int shot_a, int shot_b)
 
 int	bellow_med(int len_a, int len_b, int pos_target, int pos_bullet)
 {
-	if ((pos_bullet <= len_a / 2 && pos_target <= len_b / 2)
+	if (
+		(pos_bullet <= len_a / 2 && pos_target <= len_b / 2)
 		|| (pos_bullet <= len_a / 2 && pos_target > len_b / 2
 		&& cmp_shot(pos_bullet, pos_target) <= cmp_shot(len_a - pos_bullet, len_b - pos_target)
 		&& cmp_shot(pos_bullet, pos_target) <= pos_bullet + (len_b - pos_target))
@@ -110,7 +125,8 @@ int	bellow_med(int len_a, int len_b, int pos_target, int pos_bullet)
 
 int	top_med(int len_a, int len_b, int pos_target, int pos_bullet)
 {
-	if ((pos_bullet > len_a / 2 && pos_target > len_b / 2)
+	if (
+		(pos_bullet > len_a / 2 && pos_target > len_b / 2)
 		|| (pos_bullet > len_a / 2 && pos_target <= len_b / 2 
 		&& cmp_shot(pos_bullet, pos_target) > cmp_shot(len_a - pos_bullet, len_b - pos_target)
 		&& cmp_shot(len_a - pos_bullet, len_b - pos_target) < pos_target + (len_a - pos_bullet))
@@ -174,11 +190,36 @@ int	target_finder(t_stack *stack_a, t_stack *stack_b)
 	return (target);
 }
 
+int	target_finder_reverse(t_stack *stack_a, t_stack *stack_b)
+{
+	int target;
+
+	while (stack_b)
+	{
+		if (stack_b->value > stack_a->value)
+			break;
+		stack_b = stack_b->next;
+	}
+	target = stack_b->value;
+	while (stack_b)
+	{
+		if (stack_b->value > stack_a->value && target > stack_b->value )
+			target = stack_b->value;
+		stack_b = stack_b->next;
+	}
+	return (target);
+}
+
 void	is_random_num_calcul(t_stack *stack_a, t_stack *stack_b, t_stat *p, int i)
 {
 	int	shot;
+	int	target;
 
-	shot = shot_calcul(ft_lstlen(stack_a) + i, ft_lstlen(stack_b), get_pos(stack_b, target_finder(stack_a, stack_b)), i);
+	if (p->mode == 1)
+		target = target_finder(stack_a, stack_b);
+	else
+		target = target_finder_reverse(stack_a, stack_b);
+	shot = shot_calcul(ft_lstlen(stack_a) + i, ft_lstlen(stack_b), get_pos(stack_b, target), i);
 	if (shot < p->shotcount || !p->shotcount)
 	{
 		p->shotcount = shot;
@@ -187,11 +228,12 @@ void	is_random_num_calcul(t_stack *stack_a, t_stack *stack_b, t_stat *p, int i)
 	}
 }
 
-void	panel_init(t_stat *panel)
+void	panel_init(t_stat *panel, int mode)
 {
 	panel->shotcount = 0;
 	panel->target = 0;
 	panel->bullet = 0;
+	panel->mode = mode;
 }
 
 void	ft_calcul_lowcost(t_stack *stack_a, t_stack *stack_b, t_stat *panel)
@@ -201,7 +243,7 @@ void	ft_calcul_lowcost(t_stack *stack_a, t_stack *stack_b, t_stat *panel)
 	ia = 0;
 	while (stack_a)
 	{
-		if (is_new_min(stack_a, stack_b) || is_new_max(stack_a, stack_b))
+		if (panel->mode == 1 && (is_new_min(stack_a, stack_b) || is_new_max(stack_a, stack_b)))
 			is_min_or_max_calcul(stack_a, stack_b, panel, ia);
 		else
 			is_random_num_calcul(stack_a, stack_b, panel, ia);
@@ -241,11 +283,11 @@ void	ft_execute(t_stack **stack_a, t_stack **stack_b, t_stat *panel)
 	pb(stack_a, stack_b, 1);
 }
 
-void	ft_calcul_and_execute(t_stack **stack_a, t_stack **stack_b)
+void	ft_calcul_and_execute(t_stack **stack_a, t_stack **stack_b, int mode)
 {
 	t_stat panel;
 
-	panel_init(&panel);
-	ft_calcul_lowcost(*stack_a, *stack_b, &panel);
+	panel_init(&panel, mode);
+	ft_calcul_lowcost(*stack_a, *stack_b, &panel, mode);
 	ft_execute(stack_a, stack_b, &panel);
 }

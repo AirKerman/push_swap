@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:02:35 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/12 16:25:52 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/14 15:59:50 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct	t_value
 	int	shotcount;
 	int	target;
 	int	bullet;
+	int	mode;
 }	t_stat;
 
 /*
