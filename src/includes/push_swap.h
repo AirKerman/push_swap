@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:02:35 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/14 15:59:50 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/15 20:56:43 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct	t_value
 	int	shotcount;
 	int	target;
 	int	bullet;
-	int	mode;
 }	t_stat;
 
 /*
@@ -40,12 +39,16 @@ void	push_swap(t_stack **stack_a, t_stack **stack_b);
 void	ft_sortmin(t_stack **stack, int len);
 void	ft_sorter(t_stack **stack_a, t_stack **stack_b);
 void	ft_calcul_and_execute(t_stack **stack_a, t_stack **stack_b);
+void    ft_final_placement(t_stack **stack_b, t_stack **stack_a);
+
 /*
 
 	Utils
 
 */
 
+int		get_pos(t_stack *stack, int data);
+int		who_is_min(t_stack *stack);
 int		pos_max(t_stack *stack);
 int		ft_arrlen(char **a);
 int		ft_strlen(const char *s);

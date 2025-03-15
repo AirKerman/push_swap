@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:25:08 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/14 16:05:09 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/15 21:11:05 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,16 +157,18 @@ int	shot_calcul(int len_a, int len_b, int pos_target, int i)
 void	is_min_or_max_calcul(t_stack *stack_a, t_stack *stack_b, t_stat *p, int i)
 {
 	int	shot;
+	int	target;
 
+	target = who_is_max(stack_b);
 	if (!i && !pos_max(stack_b) && (!p->shotcount || p->shotcount > 1))
 		shot = 1;
 	else
-		shot = shot_calcul(ft_lstlen(stack_a) + i, ft_lstlen(stack_b), pos_max(stack_b), i);
+		shot = shot_calcul(ft_lstlen(stack_a) + i, ft_lstlen(stack_b), get_pos(stack_b, target), i);
 	if (shot < p->shotcount || !p->shotcount)
 	{
 		p->shotcount = shot;
 		p->bullet = stack_a->value;
-		p->target = who_is_max(stack_b);
+		p->target = target;
 	}
 }
 
@@ -215,25 +217,21 @@ void	is_random_num_calcul(t_stack *stack_a, t_stack *stack_b, t_stat *p, int i)
 	int	shot;
 	int	target;
 
-	if (p->mode == 1)
-		target = target_finder(stack_a, stack_b);
-	else
-		target = target_finder_reverse(stack_a, stack_b);
+	target = target_finder(stack_a, stack_b);
 	shot = shot_calcul(ft_lstlen(stack_a) + i, ft_lstlen(stack_b), get_pos(stack_b, target), i);
 	if (shot < p->shotcount || !p->shotcount)
 	{
 		p->shotcount = shot;
 		p->bullet = stack_a->value;
-		p->target = target_finder(stack_a, stack_b);
+		p->target = target;
 	}
 }
 
-void	panel_init(t_stat *panel, int mode)
+void	panel_init(t_stat *panel)
 {
 	panel->shotcount = 0;
 	panel->target = 0;
 	panel->bullet = 0;
-	panel->mode = mode;
 }
 
 void	ft_calcul_lowcost(t_stack *stack_a, t_stack *stack_b, t_stat *panel)
@@ -243,7 +241,7 @@ void	ft_calcul_lowcost(t_stack *stack_a, t_stack *stack_b, t_stat *panel)
 	ia = 0;
 	while (stack_a)
 	{
-		if (panel->mode == 1 && (is_new_min(stack_a, stack_b) || is_new_max(stack_a, stack_b)))
+		if ((is_new_min(stack_a, stack_b) || is_new_max(stack_a, stack_b)))
 			is_min_or_max_calcul(stack_a, stack_b, panel, ia);
 		else
 			is_random_num_calcul(stack_a, stack_b, panel, ia);
@@ -252,7 +250,23 @@ void	ft_calcul_lowcost(t_stack *stack_a, t_stack *stack_b, t_stat *panel)
 	}
 }
 
-//3 1 5 4 5435 654 7654
+void	ft_final_placement(t_stack **stack_b, t_stack **stack_a)
+{
+	int	target;
+
+	if (is_new_max(*stack_b, *stack_a) || is_new_min(*stack_b, *stack_a))
+		target = who_is_min(*stack_a);
+	else
+		target = target_finder_reverse(*stack_b, *stack_a);
+	while (get_pos(*stack_a, target))
+	{
+		if (get_pos(*stack_a, target) > ft_lstlen(*stack_a) / 2)
+			rra(stack_a, 1);
+		else 
+			ra(stack_a, 1);
+	}
+	pa(stack_b, stack_a, 1);
+}
 
 void	ft_execute(t_stack **stack_a, t_stack **stack_b, t_stat *panel)
 {
@@ -283,11 +297,11 @@ void	ft_execute(t_stack **stack_a, t_stack **stack_b, t_stat *panel)
 	pb(stack_a, stack_b, 1);
 }
 
-void	ft_calcul_and_execute(t_stack **stack_a, t_stack **stack_b, int mode)
+void	ft_calcul_and_execute(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stat panel;
 
-	panel_init(&panel, mode);
-	ft_calcul_lowcost(*stack_a, *stack_b, &panel, mode);
+	panel_init(&panel);
+	ft_calcul_lowcost(*stack_a, *stack_b, &panel);
 	ft_execute(stack_a, stack_b, &panel);
 }

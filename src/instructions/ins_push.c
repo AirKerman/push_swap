@@ -6,7 +6,7 @@
 /*   By: rkerman <rkerman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 14:57:57 by rkerman           #+#    #+#             */
-/*   Updated: 2025/02/12 12:44:22 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/15 16:02:30 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	push(t_stack **stack_a, t_stack **stack_b)
 
 void	pa(t_stack **stack_a, t_stack **stack_b, int trigger)
 {
-	push(stack_b, stack_a);
+	push(stack_a, stack_b);
 	if (trigger)
 		write(1, "pa\n", 3);
 }
