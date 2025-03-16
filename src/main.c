@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 23:15:04 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/31 20:10:37 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/17 00:42:19 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ int	main(int argc, char **argv)
 
 	stack_a = NULL;
 	stack_b = NULL;
-	if (argc - 1 && parser(&argv[1], &stack_a))
-		push_swap(&stack_a, &stack_b);
-	else
-		write (2, "Error\n", 6);
+	if (argc - 1)
+	{
+		if (parser(&argv[1], &stack_a))
+			push_swap(&stack_a, &stack_b);
+		else
+			write (2, "Error\n", 6);
+	}
 }
