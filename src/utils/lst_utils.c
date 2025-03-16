@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 14:18:15 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/31 20:11:07 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/16 23:57:24 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,47 @@ int	ft_lstlen(t_stack *lst)
 		lst = lst->next;
 	}
 	return (count);
+}
+
+int	who_is_max(t_stack *stack)
+{
+	int	max;
+
+	max = stack->value;
+	while (stack)
+	{
+		if (max < stack->value)
+			max = stack->value;
+		stack = stack->next;
+	}
+	return (max);
+}
+
+int	who_is_min(t_stack *stack)
+{
+	int	min;
+
+	min = stack->value;
+	while (stack)
+	{
+		if (min > stack->value)
+			min = stack->value;
+		stack = stack->next;
+	}
+	return (min);
+}
+
+int	get_pos(t_stack *stack, int data)
+{
+	int	i;
+
+	i = 0;
+	while (stack)
+	{
+		if (stack->value == data)
+			return (i);
+		stack = stack->next;
+		i++;
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:02:35 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/15 20:56:43 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/17 00:17:19 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct t_list
 	struct t_list	*next;
 }	t_stack;
 
-typedef struct	t_value
+typedef struct t_value
 {
 	int	shotcount;
 	int	target;
@@ -39,7 +39,8 @@ void	push_swap(t_stack **stack_a, t_stack **stack_b);
 void	ft_sortmin(t_stack **stack, int len);
 void	ft_sorter(t_stack **stack_a, t_stack **stack_b);
 void	ft_calcul_and_execute(t_stack **stack_a, t_stack **stack_b);
-void    ft_final_placement(t_stack **stack_b, t_stack **stack_a);
+int		shot_calcul(int len_a, int len_b, int pos_target, int i);
+void	ft_execute(t_stack **stack_a, t_stack **stack_b, t_stat *panel);
 
 /*
 
@@ -47,9 +48,13 @@ void    ft_final_placement(t_stack **stack_b, t_stack **stack_a);
 
 */
 
+void	panel_init(t_stat *panel);
+int		is_new_min(t_stack *stack_a, t_stack *stack_b);
+int		is_new_max(t_stack *stack_a, t_stack *stack_b);
+int		cmp_shot(int shot_a, int shot_b);
 int		get_pos(t_stack *stack, int data);
 int		who_is_min(t_stack *stack);
-int		pos_max(t_stack *stack);
+int		who_is_max(t_stack *stack);
 int		ft_arrlen(char **a);
 int		ft_strlen(const char *s);
 int		ft_lstlen(t_stack *lst);
