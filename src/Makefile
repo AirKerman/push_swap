@@ -19,10 +19,10 @@ $(NAME):	$(OBJS)
 			$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 .PHONY:		fclean
-fclean:		$(OBJS)
+fclean:
 			$(RM) $(OBJS)
 
 .PHONY:		clean
-clean:		$(OBJS)
+clean:
 			$(RM) $(OBJS) $(NAME)
 
