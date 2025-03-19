@@ -5,18 +5,18 @@ OBJS		=	$(SRCS:.c=.o)
 
 PARSINGS	=	parsing/parsor.c parsing/parsor_bis.c
 
-PARSING		=	$(PARSINGS:/parsing.c=/parsing.o)
+PARSING		=	$(PARSINGS:.c=.o)
 
 UTILS		=	utils/std_utils_a.c utils/parsor_utils.c \
 				utils/std_utils_b.c utils/ft_calloc.c utils/ft_split.c \
 				utils/lst_utils.c
 
-UTIL		=	$(UTILS:/utils.c=/utils.o)
+UTIL		=	$(UTILS:.c=.o)
 
 INS			=	instructions/ins_swap.c instructions/ins_rotate.c \
 				instructions/ins_rrotate.c instructions/ins_push.c
 
-IN			= 	$(INS:/instructions.c=/instruction.o)
+IN			= 	$(INS:.c=.o)
 
 SRCS_BNS	=	checker/checker.c
 
@@ -32,7 +32,7 @@ RM			=	rm -f
 .PHONY:		all
 all:		$(NAME)
 
-$(NAME):	$(OBJS)
+$(NAME):	$(OBJS) $(PARSING) $(UTIL) $(IN)
 			$(CC) $(CFLAGS) $(OBJS) $(PARSING) $(UTIL) $(IN) -o $(NAME)
 
 .PHONY:		fclean
