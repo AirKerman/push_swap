@@ -6,13 +6,13 @@
 /*   By: rkerman <rkerman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 23:37:37 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/11 17:47:41 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/19 20:58:52 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	ft_cal_bzero(void *s, size_t n)
+void	ft_bzero(void *s, size_t n)
 {
 	unsigned char	*srccast;
 
@@ -28,6 +28,6 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	ptr = malloc(nmemb * size);
 	if (ptr == NULL)
 		return (NULL);
-	ft_cal_bzero(ptr, nmemb * size);
+	ft_bzero(ptr, nmemb * size);
 	return (ptr);
 }

@@ -3,27 +3,21 @@ SRCS		=	main.c algorithm/push_swap.c algorithm/min_len_sort.c algorithm/sorter.c
 
 OBJS		=	$(SRCS:.c=.o)
 
-PARSINGS	=	parsing/parsor.c parsing/parsor_bis.c
+CONTENTS	=	parsing/parsor.c parsing/parsor_bis.c utils/std_utils_a.c \
+			utils/parsor_utils.c utils/std_utils_b.c utils/ft_calloc.c \
+			utils/ft_split.c utils/lst_utils.c instructions/ins_swap.c \
+			instructions/ins_rotate.c instructions/ins_rrotate.c instructions/ins_push.c
 
-PARSING		=	$(PARSINGS:.c=.o)
+CONTENT		=	$(CONTENTS:.c=.o)
 
-UTILS		=	utils/std_utils_a.c utils/parsor_utils.c \
-				utils/std_utils_b.c utils/ft_calloc.c utils/ft_split.c \
-				utils/lst_utils.c
-
-UTIL		=	$(UTILS:.c=.o)
-
-INS			=	instructions/ins_swap.c instructions/ins_rotate.c \
-				instructions/ins_rrotate.c instructions/ins_push.c
-
-IN			= 	$(INS:.c=.o)
 
 SRCS_BNS	=	checker/checker.c
 
-OBJS_BNS	=	$(SRCS_BNS:checker/.c=checker/.o)
+OBJS_BNS	=	$(SRCS_BNS:.c=.o)
 
 CC			=	cc
 NAME		=	push_swap
+NAME_CHK	=	push_checker
 
 CFLAGS		=	-Wall -Werror -Wextra -g -I includes
 RM			=	rm -f
@@ -32,16 +26,17 @@ RM			=	rm -f
 .PHONY:		all
 all:		$(NAME)
 
-$(NAME):	$(OBJS) $(PARSING) $(UTIL) $(IN)
-			$(CC) $(CFLAGS) $(OBJS) $(PARSING) $(UTIL) $(IN) -o $(NAME)
+$(NAME):	$(OBJS) $(CONTENT)
+			$(CC) $(CFLAGS) $(OBJS) $(CONTENT) -o $(NAME)
 
 .PHONY:		fclean
 fclean:
-			$(RM) $(OBJS) $(PARSING) $(UTIL) $(IN)
+			$(RM) $(OBJS) $(CONTENT) $(OBJS_BNS)
 
 .PHONY:		clean
 clean:
-			$(RM) $(OBJS) $(NAME)
+			$(RM) $(OBJS) $(CONTENT) $(NAME) $(NAME_CHK)
+
 .PHONY:		bonus
-bonus:
-			$(CC) $(CFLAGS) $(PARSING) $(UTIL) $(IN) $(OBJS_BNS)
+bonus:		$(CONTENT) $(OBJS_BNS)
+			$(CC) $(CFLAGS) $(OBJS_BNS) $(CONTENT) -o $(NAME_CHK)

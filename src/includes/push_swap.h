@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:02:35 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/17 00:17:19 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/19 20:59:04 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int		ft_lstissort(t_stack *stack);
 char	*ft_strdup(const char *s);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	**ft_split(char const *s, char c);
+void	ft_bzero(void *s, size_t n);
 int		format_v(char *v);
 int		ft_atoi(char *s);
 t_stack	*create_element(int data);
