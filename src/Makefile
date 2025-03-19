@@ -1,15 +1,22 @@
 SRCS		=	main.c algorithm/push_swap.c algorithm/min_len_sort.c algorithm/sorter.c \
 				algorithm/calculator.c algorithm/shotcount_calcul.c 
 
-SRC		=	parsing/parsor.c parsing/parsor_bis.c utils/std_utils_a.c utils/parsor_utils.c \
-			utils/std_utils_b.c utils/ft_calloc.c utils/ft_split.c instructions/ins_swap.c \
-			instructions/ins_rotate.c instructions/ins_rrotate.c instructions/ins_push.c \
-			utils/lst_utils.c
-
-
 OBJS		=	$(SRCS:.c=.o)
 
-OBJ		=	$(SRC:/parsing.c=/parsing.o)
+PARSINGS	=	parsing/parsor.c parsing/parsor_bis.c
+
+PARSING		=	$(PARSINGS:/parsing.c=/parsing.o)
+
+UTILS		=	utils/std_utils_a.c utils/parsor_utils.c \
+				utils/std_utils_b.c utils/ft_calloc.c utils/ft_split.c \
+				utils/lst_utils.c
+
+UTIL		=	$(UTILS:/utils.c=/utils.o)
+
+INS			=	instructions/ins_swap.c instructions/ins_rotate.c \
+				instructions/ins_rrotate.c instructions/ins_push.c
+
+IN			= 	$(INS:/instructions.c=/instruction.o)
 
 SRCS_BNS	=	checker/checker.c
 
@@ -26,15 +33,15 @@ RM			=	rm -f
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-			$(CC) $(CFLAGS) $(OBJS) $(OBJ) -o $(NAME)
+			$(CC) $(CFLAGS) $(OBJS) $(PARSING) $(UTIL) $(IN) -o $(NAME)
 
 .PHONY:		fclean
 fclean:
-			$(RM) $(OBJS) $(OBJ)
+			$(RM) $(OBJS) $(PARSING) $(UTIL) $(IN)
 
 .PHONY:		clean
 clean:
 			$(RM) $(OBJS) $(NAME)
 .PHONY:		bonus
 bonus:
-			$(CC) $(CFLAGS) $(OBJ) $(OBJS_BNS)
+			$(CC) $(CFLAGS) $(PARSING) $(UTIL) $(IN) $(OBJS_BNS)
