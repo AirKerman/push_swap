@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:55:26 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/20 14:57:43 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/21 00:50:21 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_strcmp(char *s, char *d)
 	return (s[i] - d[i]);
 }
 
-int	ft_isins(char *ins)
+int	ft_isins(char *ins, int	trigger)
 {
 	if (!ft_strcmp(ins, "sa\n") ||!ft_strcmp(ins, "sb\n")
 		|| !ft_strcmp(ins, "ss\n") || !ft_strcmp(ins, "pa\n")
@@ -31,7 +31,13 @@ int	ft_isins(char *ins)
 		|| !ft_strcmp(ins, "rb\n") || !ft_strcmp(ins, "rr\n")
 		|| !ft_strcmp(ins, "rra\n") || !ft_strcmp(ins, "rrb\n")
 		|| !ft_strcmp(ins, "rrr\n"))
+	{
+		if (trigger)
+			free(ins);
 		return (1);
+	}
+	if (trigger)
+		free(ins);
 	return (0);
 }
 
@@ -60,51 +66,78 @@ void	ft_exec_ins(char *ins, t_stack **stack_a, t_stack **stack_b)
 	else if (!ft_strcmp(ins, "rrr\n") || !ft_strcmp(ins, "rrr"))
                 rrr(stack_a, stack_b, 0);
 }
-#include <stdio.h>
 
-char	*ft_tchek_ins(char *start, char *end)
+char	*ft_extract_ins(char *start, char *end)
 {
+	int	len;
+	char	*ins;
+	int	i;
 
+	i = 0;
+	len = end - start;
+	ins = ft_calloc(len + 1, sizeof(char));
+	if (!ins)
+		return (NULL);
+	while (i < len)
+	{
+		ins[i] = start[i];
+		i++;
+	}
+	return (ins); 
 }
 
-int	ft_format_ins(char *ins)
+int	ft_format_ins(char ins[100000])
 {
 	char	*start;
-	char	*end;
-	int		count;
 
 	while (*ins)
 	{
-		count = 0;
 		start = ins;
-		while(*ins != '\n' || *ins != '\0')
+		while(*ins != '\n' && *ins != '\0')
 			ins++;
-		if (!ft_check_ins(start, ins))
+		if (*ins == '\n')
+			ins++;
+		if (!ft_isins(ft_extract_ins(start, ins),1))
 			return (0);
-		ins++;
 	}
 	return (1);
+}
+
+void	ft_parse_ins(char ins[100000], t_stack **stack_a, t_stack **stack_b)
+{
+	char    *start;
+	char	*instruct;
+
+        while (*ins)
+        {
+                start = ins;
+                while(*ins != '\n' && *ins != '\0')
+                        ins++;
+                if (*ins == '\n')
+                        ins++;
+		instruct = ft_extract_ins(start, ins);
+		ft_exec_ins(instruct, stack_a, stack_b);
+		free(instruct);
+        }
 }
 
 void    checking(t_stack **stack_a, t_stack **stack_b)
 {
 	char instruction[100000];
 	int	error;
-	int	len;
 
 	error = 0;
+	ft_bzero(instruction, 100000);
 	while (read(0, instruction, 100000))
 	{
-		len = ft_strlen(instruction);
-		if (ft_isins(instruction))
+		if (ft_isins(instruction, 0))
 			ft_exec_ins(instruction, stack_a, stack_b);
 		else if (ft_format_ins(instruction))
-			ft_parse_ins(instruction);
+			ft_parse_ins(instruction, stack_a, stack_b);
 		else if (!ft_strcmp(instruction, "stop\n"))
 			break;
 		else
 		{
-			printf("%s", instruction);
 			error = 1;
 			break;
 		}
