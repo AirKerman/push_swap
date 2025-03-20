@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:55:26 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/19 21:38:17 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/20 14:57:43 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,45 @@ void	ft_exec_ins(char *ins, t_stack **stack_a, t_stack **stack_b)
                 rrr(stack_a, stack_b, 0);
 }
 #include <stdio.h>
+
+char	*ft_tchek_ins(char *start, char *end)
+{
+
+}
+
+int	ft_format_ins(char *ins)
+{
+	char	*start;
+	char	*end;
+	int		count;
+
+	while (*ins)
+	{
+		count = 0;
+		start = ins;
+		while(*ins != '\n' || *ins != '\0')
+			ins++;
+		if (!ft_check_ins(start, ins))
+			return (0);
+		ins++;
+	}
+	return (1);
+}
+
 void    checking(t_stack **stack_a, t_stack **stack_b)
 {
 	char instruction[100000];
 	int	error;
+	int	len;
 
 	error = 0;
 	while (read(0, instruction, 100000))
 	{
+		len = ft_strlen(instruction);
 		if (ft_isins(instruction))
 			ft_exec_ins(instruction, stack_a, stack_b);
+		else if (ft_format_ins(instruction))
+			ft_parse_ins(instruction);
 		else if (!ft_strcmp(instruction, "stop\n"))
 			break;
 		else
@@ -79,7 +108,6 @@ void    checking(t_stack **stack_a, t_stack **stack_b)
 			error = 1;
 			break;
 		}
-		
 		ft_bzero(instruction, 5);
 	}
 	if (error)

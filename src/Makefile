@@ -29,13 +29,16 @@ all:		$(NAME)
 $(NAME):	$(OBJS) $(CONTENT)
 			$(CC) $(CFLAGS) $(OBJS) $(CONTENT) -o $(NAME)
 
-.PHONY:		fclean
-fclean:
-			$(RM) $(OBJS) $(CONTENT) $(OBJS_BNS)
-
 .PHONY:		clean
 clean:
-			$(RM) $(OBJS) $(CONTENT) $(NAME) $(NAME_CHK)
+			$(RM) $(OBJS) $(CONTENT) $(OBJS_BNS)
+
+.PHONY:		fclean
+fclean:		clean
+			$(RM) $(NAME) $(NAME_CHK)
+
+.PHONY:		re
+re:			fclean $(NAME)
 
 .PHONY:		bonus
 bonus:		$(CONTENT) $(OBJS_BNS)
