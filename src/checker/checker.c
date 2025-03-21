@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:55:26 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/21 01:17:05 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/21 15:32:36 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_strcmp(char *s, char *d)
 
 #include <stdio.h>
 
-int	ft_isins(char *ins, int	trigger)
+int	ft_isins(char *ins)
 {
 	if (!ft_strcmp(ins, "sa\n") ||!ft_strcmp(ins, "sb\n")
 		|| !ft_strcmp(ins, "ss\n") || !ft_strcmp(ins, "pa\n")
@@ -33,15 +33,7 @@ int	ft_isins(char *ins, int	trigger)
 		|| !ft_strcmp(ins, "rb\n") || !ft_strcmp(ins, "rr\n")
 		|| !ft_strcmp(ins, "rra\n") || !ft_strcmp(ins, "rrb\n")
 		|| !ft_strcmp(ins, "rrr\n"))
-	{
-		if (trigger)
-			free(ins);
 		return (1);
-	}
-	if (trigger)
-	{
-		free(ins);
-	}
 	return (0);
 }
 
@@ -50,25 +42,25 @@ void	ft_exec_ins(char *ins, t_stack **stack_a, t_stack **stack_b)
 	if (!ft_strcmp(ins, "sa\n") || !ft_strcmp(ins, "sa"))
 		sa(stack_a, 0);
 	else if (!ft_strcmp(ins, "sb\n") || !ft_strcmp(ins, "sb"))
-                sb(stack_b, 0);
+		sb(stack_b, 0);
 	else if (!ft_strcmp(ins, "ss\n") || !ft_strcmp(ins, "ss"))
-                ss(stack_a, stack_b, 0);
+		ss(stack_a, stack_b, 0);
 	else if (!ft_strcmp(ins, "pa\n") || !ft_strcmp(ins, "pa"))
-                pa(stack_b, stack_a, 0);
+		pa(stack_b, stack_a, 0);
 	else if (!ft_strcmp(ins, "pb\n") || !ft_strcmp(ins, "pb"))
-                pb(stack_a, stack_b, 0);
+		pb(stack_a, stack_b, 0);
 	else if (!ft_strcmp(ins, "ra\n") || !ft_strcmp(ins, "ra"))
-                ra(stack_a, 0);
+		ra(stack_a, 0);
 	else if (!ft_strcmp(ins, "rb\n") || !ft_strcmp(ins, "rb"))
-                rb(stack_b, 0);
+		rb(stack_b, 0);
 	else if (!ft_strcmp(ins, "rr\n") || !ft_strcmp(ins, "rr"))
-                rr(stack_a, stack_b, 0);
+		rr(stack_a, stack_b, 0);
 	else if (!ft_strcmp(ins, "rra\n") || !ft_strcmp(ins, "rra"))
-                rra(stack_a, 0);
+		rra(stack_a, 0);
 	else if (!ft_strcmp(ins, "rrb\n") || !ft_strcmp(ins, "rrb"))
-                rrb(stack_b, 0);
+		rrb(stack_b, 0);
 	else if (!ft_strcmp(ins, "rrr\n") || !ft_strcmp(ins, "rrr"))
-                rrr(stack_a, stack_b, 0);
+		rrr(stack_a, stack_b, 0);
 }
 
 char	*ft_extract_ins(char *start, char *end)
@@ -87,15 +79,14 @@ char	*ft_extract_ins(char *start, char *end)
 		ins[i] = start[i];
 		i++;
 	}
-	printf("%s", ins);
-	//printf("%c\n", start[i]);
 	return (ins); 
 }
 
-int	ft_format_ins(char ins[100000])
+int	ft_format_ins(char *ins)
 {
 	char	*start;
 	int	i;
+	char	*instruct;
 
 	i = 0;
 	while (ins[i])
@@ -105,47 +96,48 @@ int	ft_format_ins(char ins[100000])
 			i++;
 		if (ins[i] == '\n')
 			i++;
-		if (!ft_isins(ft_extract_ins(start, &ins[i]),1))
+		instruct = ft_extract_ins(start, &ins[i]);
+		if (!ft_isins(instruct))
 		{
-			printf("ici");
+			free(instruct);
 			return (0);
 		}
+		free(instruct);
 	}
 	return (1);
 }
 
-void	ft_parse_ins(char ins[100000], t_stack **stack_a, t_stack **stack_b)
+void	ft_parse_ins(char *ins, t_stack **stack_a, t_stack **stack_b)
 {
 	char    *start;
 	char	*instruct;
 	
-
-        while (*ins)
-        {
-                start = ins;
-                while(*ins != '\n' && *ins != '\0')
-                        ins++;
-                if (*ins == '\n')
-                        ins++;
+	while (*ins)
+	{
+		start = ins;
+		while(*ins != '\n' && *ins != '\0')
+			ins++;
+		if (*ins == '\n')
+			ins++;
 		instruct = ft_extract_ins(start, ins);
 		ft_exec_ins(instruct, stack_a, stack_b);
 		free(instruct);
-        }
+	}
 }
 
 void    checking(t_stack **stack_a, t_stack **stack_b)
 {
-	char instruction[100000];
+	char *instruction;
 	int	error;
 
 	error = 0;
-	ft_bzero(instruction, 100000);
-	while (read(0, instruction, 100000))
+	instruction = get_next_line(0);
+	while (instruction)
 	{
-		if (ft_isins(instruction, 0))
+		if (ft_isins(instruction))
 			ft_exec_ins(instruction, stack_a, stack_b);
 		else if (ft_format_ins(instruction))
-			printf("test");//ft_parse_ins(instruction, stack_a, stack_b);
+			ft_parse_ins(instruction, stack_a, stack_b);
 		else if (!ft_strcmp(instruction, "stop\n"))
 			break;
 		else
@@ -153,7 +145,8 @@ void    checking(t_stack **stack_a, t_stack **stack_b)
 			error = 1;
 			break;
 		}
-		ft_bzero(instruction, 5);
+		free(instruction);
+		instruction = get_next_line(0);
 	}
 	if (error)
 		write(2, "Error\n", 6);
@@ -163,6 +156,8 @@ void    checking(t_stack **stack_a, t_stack **stack_b)
 		write(1, "KO\n", 3);
 	if (stack_b)
 		ft_freelst(stack_b);
+	if (instruction)
+		free(instruction);
 	ft_freelst(stack_a);
 	exit(1);
 }

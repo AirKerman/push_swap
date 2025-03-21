@@ -11,7 +11,7 @@ CONTENTS	=	parsing/parsor.c parsing/parsor_bis.c utils/std_utils_a.c \
 CONTENT		=	$(CONTENTS:.c=.o)
 
 
-SRCS_BNS	=	checker/checker.c
+SRCS_BNS	=	checker/checker.c utils/gnl_utils.c utils/get_next_line.c
 
 OBJS_BNS	=	$(SRCS_BNS:.c=.o)
 
