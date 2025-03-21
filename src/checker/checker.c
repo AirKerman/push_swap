@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:55:26 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/21 00:50:21 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/21 01:17:05 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	ft_strcmp(char *s, char *d)
 	return (s[i] - d[i]);
 }
 
+#include <stdio.h>
+
 int	ft_isins(char *ins, int	trigger)
 {
 	if (!ft_strcmp(ins, "sa\n") ||!ft_strcmp(ins, "sb\n")
@@ -37,7 +39,9 @@ int	ft_isins(char *ins, int	trigger)
 		return (1);
 	}
 	if (trigger)
+	{
 		free(ins);
+	}
 	return (0);
 }
 
@@ -83,22 +87,29 @@ char	*ft_extract_ins(char *start, char *end)
 		ins[i] = start[i];
 		i++;
 	}
+	printf("%s", ins);
+	//printf("%c\n", start[i]);
 	return (ins); 
 }
 
 int	ft_format_ins(char ins[100000])
 {
 	char	*start;
+	int	i;
 
-	while (*ins)
+	i = 0;
+	while (ins[i])
 	{
-		start = ins;
-		while(*ins != '\n' && *ins != '\0')
-			ins++;
-		if (*ins == '\n')
-			ins++;
-		if (!ft_isins(ft_extract_ins(start, ins),1))
+		start = &ins[i];
+		while(ins[i] != '\n' && ins[i] != '\0')
+			i++;
+		if (ins[i] == '\n')
+			i++;
+		if (!ft_isins(ft_extract_ins(start, &ins[i]),1))
+		{
+			printf("ici");
 			return (0);
+		}
 	}
 	return (1);
 }
@@ -107,6 +118,7 @@ void	ft_parse_ins(char ins[100000], t_stack **stack_a, t_stack **stack_b)
 {
 	char    *start;
 	char	*instruct;
+	
 
         while (*ins)
         {
@@ -133,7 +145,7 @@ void    checking(t_stack **stack_a, t_stack **stack_b)
 		if (ft_isins(instruction, 0))
 			ft_exec_ins(instruction, stack_a, stack_b);
 		else if (ft_format_ins(instruction))
-			ft_parse_ins(instruction, stack_a, stack_b);
+			printf("test");//ft_parse_ins(instruction, stack_a, stack_b);
 		else if (!ft_strcmp(instruction, "stop\n"))
 			break;
 		else
