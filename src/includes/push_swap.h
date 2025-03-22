@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:02:35 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/21 15:02:27 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/23 00:30:41 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void	ft_execute(t_stack **stack_a, t_stack **stack_b, t_stat *panel);
 
 */
 
-char    *get_next_line(int fd);
-int     ft_chr_c(char *s, int c);
-char    *ft_strjoin(char *s, char *b);
+char	*get_next_line(int fd);
+int		ft_chr_c(char *s, int c);
+char	*ft_strjoin(char *s, char *b);
 void	panel_init(t_stat *panel);
 int		is_new_min(t_stack *stack_a, t_stack *stack_b);
 int		is_new_max(t_stack *stack_a, t_stack *stack_b);

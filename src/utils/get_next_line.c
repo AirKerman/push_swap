@@ -6,7 +6,7 @@
 /*   By: rkerman <rkerman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 15:53:06 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/21 15:38:47 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/23 00:31:08 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,5 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = ft_newline(stash[fd]);
 	stash[fd] = ft_newstash(stash[fd]);
-	if (!ft_strlen(stash[fd]))
-		free(stash[fd]);
 	return (line);
 }

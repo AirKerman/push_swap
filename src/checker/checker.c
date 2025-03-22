@@ -6,12 +6,11 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:55:26 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/21 15:32:36 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/23 00:37:32 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdint.h>
 
 int	ft_strcmp(char *s, char *d)
 {
@@ -22,8 +21,6 @@ int	ft_strcmp(char *s, char *d)
 		i++;
 	return (s[i] - d[i]);
 }
-
-#include <stdio.h>
 
 int	ft_isins(char *ins)
 {
@@ -65,9 +62,9 @@ void	ft_exec_ins(char *ins, t_stack **stack_a, t_stack **stack_b)
 
 char	*ft_extract_ins(char *start, char *end)
 {
-	int	len;
+	int		len;
 	char	*ins;
-	int	i;
+	int		i;
 
 	i = 0;
 	len = end - start;
@@ -79,20 +76,20 @@ char	*ft_extract_ins(char *start, char *end)
 		ins[i] = start[i];
 		i++;
 	}
-	return (ins); 
+	return (ins);
 }
 
 int	ft_format_ins(char *ins)
 {
 	char	*start;
-	int	i;
+	int		i;
 	char	*instruct;
 
 	i = 0;
 	while (ins[i])
 	{
 		start = &ins[i];
-		while(ins[i] != '\n' && ins[i] != '\0')
+		while (ins[i] != '\n' && ins[i] != '\0')
 			i++;
 		if (ins[i] == '\n')
 			i++;
@@ -109,13 +106,13 @@ int	ft_format_ins(char *ins)
 
 void	ft_parse_ins(char *ins, t_stack **stack_a, t_stack **stack_b)
 {
-	char    *start;
+	char	*start;
 	char	*instruct;
-	
+
 	while (*ins)
 	{
 		start = ins;
-		while(*ins != '\n' && *ins != '\0')
+		while (*ins != '\n' && *ins != '\0')
 			ins++;
 		if (*ins == '\n')
 			ins++;
@@ -125,10 +122,10 @@ void	ft_parse_ins(char *ins, t_stack **stack_a, t_stack **stack_b)
 	}
 }
 
-void    checking(t_stack **stack_a, t_stack **stack_b)
+void	checking(t_stack **stack_a, t_stack **stack_b)
 {
-	char *instruction;
-	int	error;
+	char	*instruction;
+	int		error;
 
 	error = 0;
 	instruction = get_next_line(0);
@@ -139,11 +136,11 @@ void    checking(t_stack **stack_a, t_stack **stack_b)
 		else if (ft_format_ins(instruction))
 			ft_parse_ins(instruction, stack_a, stack_b);
 		else if (!ft_strcmp(instruction, "stop\n"))
-			break;
+			break ;
 		else
 		{
 			error = 1;
-			break;
+			break ;
 		}
 		free(instruction);
 		instruction = get_next_line(0);
@@ -162,14 +159,13 @@ void    checking(t_stack **stack_a, t_stack **stack_b)
 	exit(1);
 }
 
-
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    t_stack *stack_a;
-    t_stack *stack_b;
+	t_stack	*stack_a;
+	t_stack	*stack_b;
 
-    stack_a = NULL;
-    stack_b = NULL;
+	stack_a = NULL;
+	stack_b = NULL;
 	if (argc - 1)
 	{
 		if (parser(&argv[1], &stack_a))
