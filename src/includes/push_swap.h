@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:02:35 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/23 00:30:41 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/23 13:37:49 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,18 @@ void	rr(t_stack **stack_a, t_stack **stack_b, int trigger);
 void	rra(t_stack **stack, int trigger);
 void	rrb(t_stack **stack, int trigger);
 void	rrr(t_stack **stack_a, t_stack **stack_b, int trigger);
+
+/*
+ *
+ *	
+ *	Checker Bonus Utils
+ *
+ *
+*/
+
+void	ft_exec_ins(char *ins, t_stack **stack_a, t_stack **stack_b);
+int		ft_strcmp(char *s, char *d);
+int		ft_isins(char *ins);
+char	*ft_extract_ins(char *start, char *end);
 
 #endif
