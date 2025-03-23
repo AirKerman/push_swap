@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 15:11:39 by rkerman           #+#    #+#             */
-/*   Updated: 2025/01/31 19:50:51 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/23 13:59:53 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,61 +50,3 @@ void	rr(t_stack **stack_a, t_stack **stack_b, int trigger)
 	if (trigger)
 		write(1, "rr\n", 3);
 }
-/*
-t_stack *ft_lstcreate(int data)
-{
-    t_stack *newlst;
-
-    newlst = malloc(1 * sizeof(t_stack));
-    if (!newlst)
-        return (NULL);
-    newlst->value = data;
-    newlst->next = NULL;
-    return (newlst);
-}
-
-void    ft_lstadd_back(t_stack **chainz, t_stack *newnode)
-{
-    t_stack *head;
-
-    if (!*chainz)
-    {
-        *chainz = newnode;
-        return ;
-    }
-    head = *chainz;
-    while (*chainz && (*chainz)->next)
-        *chainz = (*chainz)->next;
-    (*chainz)->next = newnode;
-    *chainz = head;
-}
-
-#include <stdio.h>
-
-int main(void)
-{
-    t_stack *ppa;
-    t_stack *pa1;
-    t_stack *pa2;
-    t_stack *pa3;
-    t_stack *ppb;
-    t_stack *pb1;
-    t_stack *pb2;
-    t_stack *pb3;
-
-
-    ppa = ft_lstcreate(1);
-    pa1 = ft_lstcreate(2);
-    pa2 = ft_lstcreate(3);
-    pa3 = ft_lstcreate(4);
-
-    ft_lstadd_back(&ppa, pa1);
-    ft_lstadd_back(&ppa, pa2);
-    ft_lstadd_back(&ppa, pa3);
-   	rr(&ppa, &ppa, 1);
-	while (ppa)
-	{
-		printf("%d", ppa->value);
-		ppa = ppa->next;
-	}
-}*/

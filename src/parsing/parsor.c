@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 17:56:24 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/12 14:56:48 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/23 14:02:07 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,32 +114,3 @@ int	parser(char **value, t_stack **stack)
 	}
 	return (stack_maker(arr, stack));
 }
-
-/*
-#include <stdio.h>
-
-int	main(int argc, char **argv)
-{
-	t_stack	*stacka;
-	int		i;
-	t_stack	*tmp;
-	//char	**turing1;	
-	
-	argc = 0;
-	i = 0;
-	argv++;
-	stacka = NULL;
-	printf("success: %d\n", parser(argv, &stacka));
-	
-	tmp = stacka;
-	while (stacka)
-	{
-		printf("%d\n", stacka->value);
-		stacka = stacka->next;
-	}
-	stacka = tmp;
-	ft_freelst(&stacka);
-	free(stacka);
-	//free_arr(turing1);
-}
-*/
