@@ -6,32 +6,13 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:25:08 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/25 14:07:07 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/25 18:34:26 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	is_min_or_max_calcul(t_stack *sa, t_stack *sb, t_stat *p, int i)
-{
-	int	shot;
-	int	target;
-
-	target = who_is_max(sb);
-	if (!i && !get_pos(sb, target) && (!p->shotcount || p->shotcount > 1))
-		shot = 1;
-	else
-		shot = shot_calcul(ft_lstlen(sa) + i,
-				ft_lstlen(sb), get_pos(sb, target), i);
-	if (shot < p->shotcount || !p->shotcount)
-	{
-		p->shotcount = shot;
-		p->bullet = sa->value;
-		p->target = target;
-	}
-}
-
-int	target_finder(t_stack *stack_a, t_stack *stack_b)
+static int	target_finder(t_stack *stack_a, t_stack *stack_b)
 {
 	int	target;
 
@@ -51,13 +32,21 @@ int	target_finder(t_stack *stack_a, t_stack *stack_b)
 	return (target);
 }
 
-void	is_random_num_calcul(t_stack *sa, t_stack *sb, t_stat *p, int i)
+static void	ft_num_calcul(t_stack *sa, t_stack *sb, t_stat *p, int i)
 {
 	int	shot;
 	int	target;
+	int	min_or_max;
 
-	target = target_finder(sa, sb);
-	shot = shot_calcul(ft_lstlen(sa) + i,
+	min_or_max = (is_new_min(sa, sb) || is_new_max(sa, sb));
+	if (min_or_max)
+		target = who_is_max(sb);
+	else
+		target = target_finder(sa, sb);
+	if (!i && !get_pos(sb, target) && (!p->shotcount || p->shotcount > 1))
+		shot = 1;
+	else
+		shot = shot_calcul(ft_lstlen(sa) + i,
 			ft_lstlen(sb), get_pos(sb, target), i);
 	if (shot < p->shotcount || !p->shotcount)
 	{
@@ -67,17 +56,14 @@ void	is_random_num_calcul(t_stack *sa, t_stack *sb, t_stat *p, int i)
 	}
 }
 
-void	ft_calcul_lowcost(t_stack *stack_a, t_stack *stack_b, t_stat *panel)
+static void	ft_calcul_lowcost(t_stack *stack_a, t_stack *stack_b, t_stat *panel)
 {
 	int		i;
 
 	i = 0;
 	while (stack_a)
 	{
-		if ((is_new_min(stack_a, stack_b) || is_new_max(stack_a, stack_b)))
-			is_min_or_max_calcul(stack_a, stack_b, panel, i);
-		else
-			is_random_num_calcul(stack_a, stack_b, panel, i);
+		ft_num_calcul(stack_a, stack_b, panel, i);
 		i++;
 		stack_a = stack_a->next;
 	}
