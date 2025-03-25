@@ -6,7 +6,7 @@
 /*   By: rkerman <rkerman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 15:53:06 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/23 00:31:08 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/25 14:05:30 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,18 @@ static char	*ft_read(char *s, int fd)
 	return (s);
 }
 
+static int	ft_free_stash(char *s, char *str, int i)
+{
+	if (str == NULL || !s[i + 1])
+	{
+		if (!s[i + 1])
+			free(str);
+		free(s);
+		return (1);
+	}
+	return (0);
+}
+
 static char	*ft_newstash(char *s)
 {
 	char	*str;
@@ -58,7 +70,7 @@ static char	*ft_newstash(char *s)
 		return (NULL);
 	}
 	str = ft_calloc((ft_strlen(s) - i), sizeof(char));
-	if (str == NULL)
+	if (ft_free_stash(s, str, i))
 		return (NULL);
 	i++;
 	j = 0;

@@ -6,12 +6,11 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:25:08 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/17 00:23:13 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/25 14:07:07 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 void	is_min_or_max_calcul(t_stack *sa, t_stack *sb, t_stat *p, int i)
 {
