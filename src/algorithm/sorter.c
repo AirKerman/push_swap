@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:36:44 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/17 00:48:21 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/25 18:42:31 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,4 @@ void	ft_sorter(t_stack **stack_a, t_stack **stack_b)
 		else
 			ra(stack_a, 1);
 	}
-	ft_freelst(stack_a);
 }

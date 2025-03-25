@@ -6,7 +6,7 @@
 /*   By: rkerman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:25:08 by rkerman           #+#    #+#             */
-/*   Updated: 2025/03/25 18:34:26 by rkerman          ###   ########.fr       */
+/*   Updated: 2025/03/25 18:40:02 by rkerman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	ft_num_calcul(t_stack *sa, t_stack *sb, t_stat *p, int i)
 		shot = 1;
 	else
 		shot = shot_calcul(ft_lstlen(sa) + i,
-			ft_lstlen(sb), get_pos(sb, target), i);
+				ft_lstlen(sb), get_pos(sb, target), i);
 	if (shot < p->shotcount || !p->shotcount)
 	{
 		p->shotcount = shot;
